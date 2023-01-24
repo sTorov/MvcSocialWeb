@@ -14,7 +14,7 @@ namespace MvcSocialWeb.ViewModels.Account
 
         [Required]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string EmailReg { get; set; }
 
         [Required]
         [Display(Name = "Год")]
