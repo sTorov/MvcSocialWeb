@@ -1,20 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MvcSocialWeb.Data;
 using MvcSocialWeb.ViewModels;
+using MvcSocialWeb.ViewModels.Account;
 using System.Diagnostics;
 
 namespace MvcSocialWeb.Controllers
 {
-    public class HomeController : Controller
+    public class RegisterController : Controller
     {
-        public IActionResult Index()
+        [Route("Register")]
+        [HttpGet]
+        public IActionResult Register()
         {
-            return View();
+            return View("Views/Shared/Register.cshtml");
         }
 
-        public IActionResult Privacy()
+        [Route("RegisterPart2")]
+        [HttpGet]
+        public IActionResult RegisterPart2(RegisterViewModel model)
         {
-            return View();
+            return View("RegisterPart2", model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
