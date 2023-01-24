@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.Data;
-using MvcSocialWeb.Models;
+using MvcSocialWeb.ViewModels;
 using System.Diagnostics;
 
 namespace MvcSocialWeb.Controllers

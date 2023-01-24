@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MvcSocialWeb.Models
+namespace MvcSocialWeb.ViewModels.Account
 {
     public class RegisterViewModel
     {
