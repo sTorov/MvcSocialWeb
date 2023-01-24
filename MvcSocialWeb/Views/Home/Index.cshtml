@@ -1,12 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Главная";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    @foreach(var user in Model)
-    {
-        <p>@user.Id</p>
-    }
+<div class="row">
+    <div class="side">
+        Описание самой клёвой соцсети
+    </div>
+
+    <div class="main">
+        блок регистрации
+        блок авторизации
+    </div>
 </div>
