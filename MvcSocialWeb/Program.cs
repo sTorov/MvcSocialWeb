@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MvcSocialWeb.Data;
+using MvcSocialWeb.Data.DBModel;
 
 namespace MvcSocialWeb
 {
@@ -12,7 +14,16 @@ namespace MvcSocialWeb
             var builder = WebApplication.CreateBuilder(args);
 
             var connection = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<SocialWebContext>(option => option.UseSqlServer(connection), ServiceLifetime.Singleton);
+            builder.Services.AddDbContext<SocialWebContext>(option => option.UseSqlServer(connection));
+
+            builder.Services.AddIdentity<User, IdentityRole>(option =>
+            {
+                option.Password.RequiredLength = 5;
+                option.Password.RequireNonAlphanumeric = false;
+                option.Password.RequireLowercase = false;
+                option.Password.RequireUppercase = false;
+                option.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<SocialWebContext>();
 
             builder.Services.AddControllersWithViews();
 
@@ -31,6 +42,7 @@ namespace MvcSocialWeb
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

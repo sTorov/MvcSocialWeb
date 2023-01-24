@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MvcSocialWeb.Data;
 using MvcSocialWeb.Models;
 using System.Diagnostics;
 
@@ -6,16 +7,18 @@ namespace MvcSocialWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private SocialWebContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(SocialWebContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var users = _context.Users.ToList();
+
+            return View(users);
         }
 
         public IActionResult Privacy()
