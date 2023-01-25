@@ -6,21 +6,83 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
 
-<h2>Регистрация нового пользователя</h2>
-<form method="get" asp-controller="Register" asp-action="RegisterPart2">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="FirstName"></label><br />
-        <input asp-for="FirstName" />
-        <span asp-validation-for="FirstName"></span>
-    </div>
-    <div>
-        <label asp-for="LastName"></label><br />
-        <input asp-for="LastName" />
-        <span asp-validation-for="LastName"></span>
-    </div>
+<div class="block-reg background-white">
+    <h4 class="text-center">Впервые с нами?</h4>
+    <div class="text-center text-color-gray">Регистрация нового пользователя</div>
+    <form class="frm" method="get" asp-controller="Register" asp-action="RegisterPart2">
+        <div asp-validation-summary="ModelOnly"></div>
 
-    <div>
-        <input type="submit" value="Регистрация" />
-    </div>
-</form>
+        <div>
+            <div class="mrgn">
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div>
+            <div class="mrgn">
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="text-color-gray text-size_12">Дата рождения</div>
+
+        <div class="mrgn text-center">
+            <select asp-for="Date" class="form-control date_control" id="ddlDay">
+                <option>@Model.Date</option>
+            </select>
+            <span asp-validation-for="Date" class="text-danger"></span>
+
+            <select asp-for="Month" class="form-control date_control" id="ddlMonth"
+            asp-items="Html.GetEnumSelectList<MvcSocialWeb.ViewModels.Months>()"
+            onchange="PopulateDays()">
+                <option>@Model.Month</option>
+            </select>
+            <span asp-validation-for="Month" class="text-danger"></span>
+
+            <select asp-for="Year" class="form-control date_control" id="ddlYear" 
+            asp-items="Enumerable.Range(DateTime.Now.AddYears(-100).Year, 
+                        DateTime.Now.AddYears(-14).Year - DateTime.Now.AddYears(-100).Year)
+                        .Reverse().Select(x => new SelectListItem(x.ToString(), x.ToString()))"
+            onchange="PapulateDays()">
+                <option>@Model.Year</option>
+            </select>
+            <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+
+        <div class="text-center">
+            <input class="btn_submit" type="submit" value="Продолжить регистрацию" />
+        </div>
+    </form>
+
+    @Model.Month
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <script type="text/javascript">
+        function PopulateDays(){
+            const ddlMonth = document.getElementById("ddlMonth");
+            const ddlYear = document.getElementById("ddlYear");
+            const ddlDay = document.getElementById("ddlDay");
+
+            const y = ddlYear.options[ddlYear.selectedIndex].value;
+            const m = ddlMonth.options[ddlMonth.selectedIndex].value;
+
+            if(m != 0 && y != 0){
+                const dayCount = 32 - new Date(y, m - 1, 32).getDate();
+                ddlDay.options.length = 0;
+                for(let i = 1; i <= dayCount; i++){
+                    AddOption(ddlDay, i, i);
+                }
+            }
+        }
+
+        function AddOption(ddl, text, value){
+            const opt = document.createElement("option");
+            opt.text = text;
+            opt.value = value;
+            ddl.options.add(opt);
+        }
+    </script>
+</div>

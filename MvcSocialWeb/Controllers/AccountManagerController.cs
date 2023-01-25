@@ -42,8 +42,8 @@ namespace MvcSocialWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var u = await _userManager.FindByEmailAsync(model.UserEmail);
-                var result = await _signInManager.PasswordSignInAsync(u.UserName, model.Password, model.RememberMe, false);
+                var userName = (await _userManager.FindByEmailAsync(model.UserEmail))?.UserName;
+                var result = await _signInManager.PasswordSignInAsync(userName, model.Password, model.RememberMe, false);
 
                 if (result.Succeeded)
                 {

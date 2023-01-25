@@ -23,6 +23,10 @@
     background-color: #edeef0;
 }
 
+.header{
+
+}
+
 .topnav{
     padding: 20px;
     text-align: center;
@@ -35,10 +39,36 @@
     max-width: max-content;
 }
 
-.background-main{
-    background-color: #edeef0;
+.block-reg{
+
 }
 
-.background-white{
-    background-color: white;
+.mrgn {
 }
+
+.frm{
+
+}
+
+.link{
+
+}
+
+.enter_submit{
+
+}
+
+.date_control{
+
+}
+
+.btn_submit{
+
+}
+
+.background-main {
+    background-color: #edeef0;
+}
+.background-white{ background-color: white; }
+.text-color-gray{ color: gray; }
+.text-size_12{ font-size: 12px; }
