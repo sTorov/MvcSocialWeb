@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MvcSocialWeb.Data;
 using MvcSocialWeb.ViewModels;
 using System.Diagnostics;
 
