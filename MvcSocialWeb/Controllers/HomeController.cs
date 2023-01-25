@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.ViewModels;
+using MvcSocialWeb.ViewModels.Account;
 using System.Diagnostics;
 
 namespace MvcSocialWeb.Controllers
@@ -8,7 +9,7 @@ namespace MvcSocialWeb.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(new AccountView());
         }
 
         public IActionResult Privacy()

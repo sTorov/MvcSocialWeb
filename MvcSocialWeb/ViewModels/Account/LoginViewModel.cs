@@ -20,6 +20,6 @@ namespace MvcSocialWeb.ViewModels.Account
         [Display(Name = "Запомнть?")]
         public bool RememberMe { get; set; }
 
-        public string ReturnUrl { get; set; }
+        public string? ReturnUrl { get; set; }
     }
 }

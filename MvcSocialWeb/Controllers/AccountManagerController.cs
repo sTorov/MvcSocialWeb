@@ -42,8 +42,8 @@ namespace MvcSocialWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _mapper.Map<User>(model);
-                var result = await _signInManager.PasswordSignInAsync(user.Email, model.Password, model.RememberMe, false);
+                var u = await _userManager.FindByEmailAsync(model.UserEmail);
+                var result = await _signInManager.PasswordSignInAsync(u.UserName, model.Password, model.RememberMe, false);
 
                 if (result.Succeeded)
                 {
@@ -55,7 +55,7 @@ namespace MvcSocialWeb.Controllers
                 else
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
             }
-            return View("Views/Home/Index.cshtml");
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
