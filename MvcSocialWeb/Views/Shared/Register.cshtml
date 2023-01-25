@@ -36,7 +36,7 @@
 
             <select asp-for="Month" class="form-control date_control" id="ddlMonth"
             asp-items="Html.GetEnumSelectList<MvcSocialWeb.ViewModels.Months>()"
-            onchange="PopulateDays()">
+                    onchange="PopulateDays()">
                 <option>@Model.Month</option>
             </select>
             <span asp-validation-for="Month" class="text-danger"></span>
@@ -45,7 +45,7 @@
             asp-items="Enumerable.Range(DateTime.Now.AddYears(-100).Year, 
                         DateTime.Now.AddYears(-14).Year - DateTime.Now.AddYears(-100).Year)
                         .Reverse().Select(x => new SelectListItem(x.ToString(), x.ToString()))"
-            onchange="PapulateDays()">
+                    onchange="PopulateDays()">
                 <option>@Model.Year</option>
             </select>
             <span asp-validation-for="Year" class="text-danger"></span>
@@ -55,8 +55,6 @@
             <input class="btn_submit" type="submit" value="Продолжить регистрацию" />
         </div>
     </form>
-
-    @Model.Month
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 

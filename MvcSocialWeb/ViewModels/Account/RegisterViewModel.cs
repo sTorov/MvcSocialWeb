@@ -19,15 +19,15 @@ namespace MvcSocialWeb.ViewModels.Account
 
         [Required]
         [Display(Name = "Год")]
-        public int Year { get; set; }
+        public int? Year { get; set; }
 
         [Required]
         [Display(Name = "День")]
-        public int Date { get; set; }
+        public int? Date { get; set; }
 
         [Required]
         [Display(Name = "Месяц")]
-        public int Month { get; set; }
+        public Months? Month { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

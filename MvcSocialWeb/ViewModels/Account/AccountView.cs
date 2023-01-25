@@ -7,5 +7,11 @@
     {
         public RegisterViewModel RegisterView { get; set; }
         public LoginViewModel LoginView { get; set; }
+
+        public AccountView()
+        {
+            RegisterView = new RegisterViewModel();
+            LoginView = new LoginViewModel();
+        }
     }
 }
