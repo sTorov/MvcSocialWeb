@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MvcSocialWeb.Data;
 using MvcSocialWeb.Data.DBModel;
+using System.Reflection;
 
 namespace MvcSocialWeb
 {
@@ -15,6 +16,9 @@ namespace MvcSocialWeb
 
             var connection = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<SocialWebContext>(option => option.UseSqlServer(connection));
+
+            var assembly = Assembly.GetAssembly(typeof(MapperProfile));
+            builder.Services.AddAutoMapper(assembly);
 
             builder.Services.AddIdentity<User, IdentityRole>(option =>
             {
