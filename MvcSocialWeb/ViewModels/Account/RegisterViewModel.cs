@@ -13,6 +13,7 @@ namespace MvcSocialWeb.ViewModels.Account
         public string LastName { get; set; }
 
         [Required]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string EmailReg { get; set; }
 

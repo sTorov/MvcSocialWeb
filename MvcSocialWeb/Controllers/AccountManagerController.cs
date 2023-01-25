@@ -21,9 +21,14 @@ namespace MvcSocialWeb.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        /// <summary>
+        /// Показ формы авторизации пользователя
+        /// </summary>
+        [Route("Login")]
+        [HttpGet]
+        public IActionResult Login()
         {
-            return View();
+            return View("Home/Login");
         }
     }
 }
