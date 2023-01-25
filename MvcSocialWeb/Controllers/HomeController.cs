@@ -7,11 +7,21 @@ namespace MvcSocialWeb.Controllers
 {
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Отображение главной страницы
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
-            return View(new AccountView());
+            if(User.Identity.IsAuthenticated)
+                return View("StartPage");
+            else
+                return View(new AccountView());
         }
 
+        /// <summary>
+        /// Страница политики безопасности
+        /// </summary>
         public IActionResult Privacy()
         {
             return View();
