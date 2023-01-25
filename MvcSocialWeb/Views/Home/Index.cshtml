@@ -4,10 +4,14 @@
 
 <div class="row">
     <div class="side">
-        Описание самой клёвой соцсети
+        <div class="center">
+            Пользуйтесь нашей самой крутой соцсетью! Регистрируйтесь всего за 2 минуты, делитесь мыслями, находите новых друзей.
+        </div>
+        <img class="main-img" src="http://pngimg.com/uploads/husky/husky_PNG19.png" />
     </div>
 
     <main class="main">
-        <partial name="Register" />
+        <partial name="Login" model="Model.LoginView" />
+        <partial name="Register" model="Model.RegisterView"/>
     </main>
 </div>
