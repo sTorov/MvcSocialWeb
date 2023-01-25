@@ -50,7 +50,11 @@
 
 }
 
-.link{
+.logout-frm{
+
+}
+
+.link {
 
 }
 
@@ -66,9 +70,11 @@
 
 }
 
-.background-main {
-    background-color: #edeef0;
+.center{
+
 }
+
+.background-main { background-color: #edeef0; }
 .background-white{ background-color: white; }
 .text-color-gray{ color: gray; }
 .text-size_12{ font-size: 12px; }

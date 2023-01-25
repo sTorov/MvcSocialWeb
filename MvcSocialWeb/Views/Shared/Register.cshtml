@@ -7,8 +7,8 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
 
 <div class="block-reg background-white">
-    <h4 class="text-center">Впервые с нами?</h4>
-    <div class="text-center text-color-gray">Регистрация нового пользователя</div>
+    <h4 class="center">Впервые с нами?</h4>
+    <div class="center text-color-gray">Регистрация нового пользователя</div>
     <form class="frm" method="get" asp-controller="Register" asp-action="RegisterPart2">
         <div asp-validation-summary="ModelOnly"></div>
 
@@ -28,7 +28,7 @@
 
         <div class="text-color-gray text-size_12">Дата рождения</div>
 
-        <div class="mrgn text-center">
+        <div class="mrgn center">
             <select asp-for="Date" class="form-control date_control" id="ddlDay">
                 <option>@Model.Date</option>
             </select>
@@ -51,7 +51,7 @@
             <span asp-validation-for="Year" class="text-danger"></span>
         </div>
 
-        <div class="text-center">
+        <div class="center">
             <input class="btn_submit" type="submit" value="Продолжить регистрацию" />
         </div>
     </form>
