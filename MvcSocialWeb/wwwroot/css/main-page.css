@@ -46,6 +46,18 @@
     margin: 30px;
 }
 
+.block-reg-step2 {
+    padding: 40px;
+    width: 50%;
+    margin: 40px auto;
+}
+
+.label-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .mrgn {
     display: flex;
     flex-direction: column;
@@ -58,6 +70,10 @@
 }
 
 .frm {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 0 auto;
 }
 
 .logout-frm {
@@ -98,22 +114,22 @@
     border-radius: 5px;
 }
 
-.enter_submit {
+.btn_submit {
     background-color: #32a852;
     transition: .2s;
 }
 
-    .enter_submit:hover {
+    .btn_submit:hover {
         background-color: #2d9649;
         transition: .2s;
     }
 
-.btn_submit {
+.enter_submit {
     background-color: #4169e1;
     transition: .2s;
 }
 
-    .btn_submit:hover {
+    .enter_submit:hover {
         background-color: #3a5ec9;
         transition: .2s;
     }
@@ -145,6 +161,23 @@
     margin-bottom: 15px;
 }
 
-.right-pos-messsage{
+.margin-bottom_40{
+    margin-bottom: 40px;
+}
+
+.right-pos-messsage {
     align-self: end;
+}
+
+.width-initial{
+    width: initial;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.margin_7 {
+    margin: 7px;
 }
