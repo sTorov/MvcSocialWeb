@@ -7,12 +7,12 @@ namespace MvcSocialWeb.ViewModels.Account
     /// </summary>
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Поле обязательно для заполнения!")]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string UserEmail { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Поле обязательно для заполнения!")]
         [Display(Name = "Пароль")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
