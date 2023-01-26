@@ -1,11 +1,11 @@
 ﻿.main {
-    -ms-flex: 40%;  /*IE10*/
+    -ms-flex: 40%; /*IE10*/
     flex: 40%;
     padding: 20px;
 }
 
 .side {
-    -ms-flex: 60%;  /*IE10*/
+    -ms-flex: 60%; /*IE10*/
     flex: 60%;
     padding: 20px;
 }
@@ -17,64 +17,134 @@
     flex-wrap: wrap;
 }
 
-.footer{
+.footer {
     padding: 20px;
     text-align: center;
     background-color: #edeef0;
 }
 
-.header{
-
+.header {
 }
 
-.topnav{
+.topnav {
     padding: 20px;
-    text-align: center;
     width: 100%;
     background-color: white;
 }
 
-.main-img{
+.main-img {
     width: 100%;
     max-width: max-content;
 }
 
-.block-reg{
+.input-validation-error{
+    border-color: red;
+}
 
+.block-reg {
+    padding: 40px;
+    margin: 30px;
 }
 
 .mrgn {
+    display: flex;
+    flex-direction: column;
+    padding: 0 5px;
+    margin: 7px;
 }
 
-.frm{
-
+.mrgn-date{
+    flex-direction: row;
 }
 
-.logout-frm{
+.frm {
+}
 
+.logout-frm {
+    display: inline-block;
 }
 
 .link {
-
+    color: gray;
+    transition: .2s;
 }
 
-.enter_submit{
+    .link:hover {
+        color: black;
+        transition: .2s;
+    }
 
+.date_control {
+    flex: 15%;
+    appearance: menulist;
+    margin: 0 4px;
 }
 
-.date_control{
-
+.date_control:nth-of-type(2){
+    flex: 25%;
 }
 
-.btn_submit{
-
+.reg-title{
+    margin-bottom: 5px;
 }
 
-.center{
-
+.enter_submit, .btn_submit{
+    border: none;
+    outline: none;
+    color: white;
+    width: 100%;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
 }
 
-.background-main { background-color: #edeef0; }
-.background-white{ background-color: white; }
-.text-color-gray{ color: gray; }
-.text-size_12{ font-size: 12px; }
+.enter_submit {
+    background-color: #32a852;
+    transition: .2s;
+}
+
+    .enter_submit:hover {
+        background-color: #2d9649;
+        transition: .2s;
+    }
+
+.btn_submit {
+    background-color: #4169e1;
+    transition: .2s;
+}
+
+    .btn_submit:hover {
+        background-color: #3a5ec9;
+        transition: .2s;
+    }
+
+/*---------------------------*/
+
+.center {
+    justify-content: center;
+    text-align: center;
+}
+
+.background-main {
+    background-color: #edeef0;
+}
+
+.background-white {
+    background-color: white;
+}
+
+.text-color-gray {
+    color: gray;
+}
+
+.text-size_12 {
+    font-size: 12px;
+}
+
+.margin-bottom_15{
+    margin-bottom: 15px;
+}
+
+.right-pos-messsage{
+    align-self: end;
+}

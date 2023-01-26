@@ -3,43 +3,42 @@
     ViewData["Title"] = "Register";
 }
 
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.js"></script>
 
 <div class="block-reg background-white">
-    <h4 class="center">Впервые с нами?</h4>
-    <div class="center text-color-gray">Регистрация нового пользователя</div>
+    <h4 class="center reg-title">Впервые с нами?</h4>
+    <div class="center text-color-gray margin-bottom_15">Регистрация нового пользователя</div>
     <form class="frm" method="get" asp-controller="Register" asp-action="RegisterPart2">
         <div asp-validation-summary="ModelOnly"></div>
 
         <div>
             <div class="mrgn">
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <input asp-for="FirstName" class="form-control" placeholder="Введите имя"/>
+                <span asp-validation-for="FirstName" class="text-danger text-size_12 right-pos-messsage"></span>
             </div>
         </div>
 
         <div>
             <div class="mrgn">
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <input asp-for="LastName" class="form-control" placeholder="Введите фамилию"/>
+                <span asp-validation-for="LastName" class="text-danger text-size_12 right-pos-messsage"></span>
             </div>
         </div>
 
         <div class="text-color-gray text-size_12">Дата рождения</div>
 
-        <div class="mrgn center">
+        <div class="mrgn mrgn-date center">
             <select asp-for="Date" class="form-control date_control" id="ddlDay">
                 <option>@Model.Date</option>
             </select>
-            <span asp-validation-for="Date" class="text-danger"></span>
 
             <select asp-for="Month" class="form-control date_control" id="ddlMonth"
             asp-items="Html.GetEnumSelectList<MvcSocialWeb.ViewModels.Months>()"
                     onchange="PopulateDays()">
                 <option>@Model.Month</option>
             </select>
-            <span asp-validation-for="Month" class="text-danger"></span>
 
             <select asp-for="Year" class="form-control date_control" id="ddlYear" 
             asp-items="Enumerable.Range(DateTime.Now.AddYears(-100).Year, 
@@ -48,12 +47,8 @@
                     onchange="PopulateDays()">
                 <option>@Model.Year</option>
             </select>
-            <span asp-validation-for="Year" class="text-danger"></span>
         </div>
-
-        <div class="center">
-            <input class="btn_submit" type="submit" value="Продолжить регистрацию" />
-        </div>
+        <button class="btn_submit" type="submit">Продолжить регистрацию</button>
     </form>
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
