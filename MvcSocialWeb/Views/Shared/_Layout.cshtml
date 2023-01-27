@@ -12,10 +12,14 @@
 <body class="background-main">
     <header class="border-bottom header background-white">
         <div class="container">
-            <nav class="topnav">
-                <a class="link text-decoration-none" asp-area="" asp-controller="Home" asp-action="Index">SocialNetwork</a>
-                <partial name="_SearchLayoutPartial" />
-                <partial name="_Logout" />
+            <nav class="topnav flex-space-between">
+                <div class="left-nav-block flex-alitem-center">
+                    <a class="link text-decoration-none" asp-area="" asp-controller="Home" asp-action="Index">SocialNetwork</a>
+                </div>
+                <div class="right-nav-block flex-space-between flex-alitem-center">
+                    <partial name="_SearchLayoutPartial" />
+                    <partial name="_Logout" />
+                </div>
             </nav>
         </div>
     </header>

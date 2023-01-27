@@ -6,6 +6,6 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <form method="post" asp-controller="AccountManager" asp-action="Logout">
-        <input type="submit" class="" value="Выход" />
+        <button class="enter_submit margin_0" type="submit">Выход</button>
     </form>
 }
