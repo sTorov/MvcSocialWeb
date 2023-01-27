@@ -40,23 +40,27 @@
         <div class="text-color-gray text-size_12">Дата рождения</div>
 
         <div class="mrgn mrgn-date center">
-            <select asp-for="Date" class="form-control date_control" id="ddlDay">
-                <option>@Model.Date</option>
-            </select>
+            <div class="date_control-wrapper">
+                <select asp-for="Date" class="form-control date_control default-color " id="ddlDay">
+                    <option>@Model.Date</option>
+                </select>
+            </div>
 
-            <select asp-for="Month" class="form-control date_control" id="ddlMonth"
-                    asp-items="Html.GetEnumSelectList<MvcSocialWeb.ViewModels.Months>()"
-                    onchange="PopulateDays()">
-                <option>@Model.Month</option>
-            </select>
+            <div class="date_control-wrapper">
+                <select asp-for="Month" class="form-control date_control default-color " id="ddlMonth"
+                        asp-items="Html.GetEnumSelectList<MvcSocialWeb.ViewModels.Months>()">
+                    <option>@Model.Month</option>
+                </select>
+            </div>
 
-            <select asp-for="Year" class="form-control date_control" id="ddlYear"
-                    asp-items="Enumerable.Range(DateTime.Now.AddYears(-100).Year,
-                        DateTime.Now.AddYears(-14).Year - DateTime.Now.AddYears(-100).Year)
-                        .Reverse().Select(x => new SelectListItem(x.ToString(), x.ToString()))"
-                    onchange="PopulateDays()">
-                <option>@Model.Year</option>
-            </select>
+            <div class="date_control-wrapper">
+                <select asp-for="Year" class="form-control date_control default-color" id="ddlYear"
+                        asp-items="Enumerable.Range(DateTime.Now.AddYears(-100).Year,
+                    DateTime.Now.AddYears(-14).Year - DateTime.Now.AddYears(-100).Year)
+                    .Reverse().Select(x => new SelectListItem(x.ToString(), x.ToString()))">
+                    <option>@Model.Year</option>
+                </select>
+            </div>
         </div>
 
         <div class="margin_7 flex-col">
@@ -89,7 +93,10 @@
     <script src="~/js/main-page.js"></script>
 
     <script>
+        RemoveEventListener(ddlDay);
+        RemoveEventListener(ddlMonth);
+        RemoveEventListener(ddlYear);
         PopulateDays();
-        RemoveFirstOptionForYearAndMonth();
+        RemoveOption(0);
     </script>
 </div>

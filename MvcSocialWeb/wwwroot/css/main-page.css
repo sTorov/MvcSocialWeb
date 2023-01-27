@@ -112,14 +112,36 @@
         transition: .2s;
     }
 
-.date_control {
+.date_control-wrapper {
+    position: relative;
     flex: 15%;
-    appearance: menulist;
     margin: 0 4px;
 }
 
-.date_control:nth-of-type(2){
+.date_control-wrapper:nth-of-type(2) {
     flex: 25%;
+}
+
+    .date_control-wrapper:nth-of-type(2)::before {
+        transform: translate(-50%, -50%);
+    }
+
+    .date_control-wrapper::before {
+        position: absolute;
+        content: "";
+        width: 10px;
+        height: 10px;
+        left: 90%;
+        top: 50%;
+        background-color: transparent;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='black' class='bi bi-caret-down-fill' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+        transform: translate(-80%, -50%);
+        pointer-events: none;
+    }
+
+.date_control {
+    appearance: none;
+    color: #999;
 }
 
 .reg-title{
@@ -160,10 +182,19 @@
     display: inline-block;
 }
 
+.date_control > option.default-opt{
+    color: #999;
+}
+
+.date_control > option {
+    color: #212529;
+}
+
+.form-control::-webkit-input-placeholder {
+    color: #999;
+}
 
 /*---------------------------*/
-
-
 .center {
     justify-content: center;
     text-align: center;
@@ -179,6 +210,10 @@
 
 .text-color-gray {
     color: gray;
+}
+
+.default-color {
+    color: #212529;
 }
 
 .text-size_12 {
