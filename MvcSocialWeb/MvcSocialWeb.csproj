@@ -16,8 +16,4 @@
     <ProjectReference Include="..\MvcSocialWeb.Data\MvcSocialWeb.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\AccountManager\" />
-  </ItemGroup>
-
 </Project>

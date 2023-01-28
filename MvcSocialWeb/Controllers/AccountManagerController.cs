@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.Data.DBModel;
+using MvcSocialWeb.ViewModels;
 using MvcSocialWeb.ViewModels.Account;
 
 namespace MvcSocialWeb.Controllers
@@ -42,15 +44,15 @@ namespace MvcSocialWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userName = (await _userManager.FindByEmailAsync(model.UserEmail))?.UserName;
-                var result = await _signInManager.PasswordSignInAsync(userName, model.Password, model.RememberMe, false);
+                var user = await _userManager.FindByEmailAsync(model.UserEmail);
+                var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
 
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                         return Redirect(model.ReturnUrl);
                     else
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("MyPage", new UserViewModel(user));
                 }
                 else
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
@@ -68,6 +70,18 @@ namespace MvcSocialWeb.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        /// <summary>
+        /// Страница пользователя
+        /// </summary>
+        [HttpGet]
+        [Route("MyPage")]
+        [Authorize]
+        public IActionResult MyPage()
+        {
+            var result = _userManager.GetUserAsync(User);
+            return View("User", new UserViewModel(result.Result));
         }
     }
 }

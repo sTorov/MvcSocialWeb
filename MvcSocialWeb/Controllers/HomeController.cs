@@ -19,12 +19,12 @@ namespace MvcSocialWeb.Controllers
         /// <summary>
         /// Отображение главной страницы
         /// </summary>
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
+            if(User.Identity.IsAuthenticated)
             {
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                return View("User", new UserViewModel(user));
+                var taskUser = _userManager.GetUserAsync(User);
+                return RedirectToAction("MyPage", "AccountManager", new UserViewModel(taskUser.Result));
             }
             else
                 return View(new AccountView());
