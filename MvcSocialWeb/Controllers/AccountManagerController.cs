@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.Data.DBModel;
-using MvcSocialWeb.ViewModels;
+using MvcSocialWeb.ViewModels.Users;
 using MvcSocialWeb.ViewModels.Account;
 
 namespace MvcSocialWeb.Controllers

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.Data.DBModel;
 using MvcSocialWeb.ViewModels;
 using MvcSocialWeb.ViewModels.Account;
+using MvcSocialWeb.ViewModels.Users;
 using System.Diagnostics;
 
 namespace MvcSocialWeb.Controllers

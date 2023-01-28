@@ -1,6 +1,6 @@
 ﻿using MvcSocialWeb.Data.DBModel;
 
-namespace MvcSocialWeb.ViewModels
+namespace MvcSocialWeb.ViewModels.Users
 {
     public class UserViewModel
     {
