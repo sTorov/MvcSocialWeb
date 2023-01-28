@@ -4,3 +4,85 @@
     ViewData["Title"] = "Обновление учетных данных";
 }
 
+<div class="background-white wrapper">
+    <h2 class="center title">Редактирование пользователя</h2>
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <form class="frm width-500" method="post" asp-controller="" asp-action="">
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="FirstName" class="flex-20"></label>
+                <input asp-for="FirstName" class="form-control flex-50" placeholder="Введите имя" />
+            </div>
+            <span asp-validation-for="FirstName" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="LastName" class="flex-20"></label>
+                <input asp-for="LastName" class="form-control flex-50" placeholder="Введите фамилию" />
+            </div>
+            <span asp-validation-for="LastName" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="MiddleName" class="flex-20"></label>
+                <input asp-for="MiddleName" class="form-control flex-50" placeholder="Введите отчество" />
+            </div>
+            <span asp-validation-for="MiddleName" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="UserName" class="flex-20"></label>
+                <input asp-for="UserName" class="form-control flex-50" placeholder="Введите никнейм" />
+            </div>
+            <span asp-validation-for="UserName" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="BirthDate" class="width-35p"></label>
+                <input asp-for="BirthDate" class="form-control width-initial" type="date"/>
+            </div>
+            <span asp-validation-for="BirthDate" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="Email" class="flex-20"></label>
+                <input asp-for="Email" class="form-control flex-50" placeholder="Введите email" />
+            </div>
+            <span asp-validation-for="Email" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="Image" class="flex-20"></label>
+                <input asp-for="Image" class="form-control flex-50" placeholder="Введите адрес изображения" />
+            </div>
+            <span asp-validation-for="Image" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="Status" class="flex-20"></label>
+                <input asp-for="Status" class="form-control flex-50" placeholder="Введите статус" />
+            </div>
+            <span asp-validation-for="Status" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-start">
+                <label asp-for="About" class="flex-20"></label>
+                <textarea rows="3" asp-for="About" class="textarea form-control flex-50" placeholder="Введите описание"></textarea>
+@*                <input asp-for="About" class="form-control flex-50" placeholder="Введите описание" />
+*@            </div>
+            <span asp-validation-for="About" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <button class="btn_submit" type="submit">Сохранить</button>
+    </form>
+</div>

@@ -9,7 +9,9 @@
     <div class="user-container">
         <aside class="flex-col user-side">
             <img class="user-image" src="@Model.User.Image" />
-            <button class="btn_submit">Редактировать</button>
+            <form method="get" asp-action="Edit" asp-controller="AccountManager">
+                <button class="btn_submit" type="submit">Редактировать</button>
+            </form>
         </aside>
         <main class="main-user">
             <div class="info">

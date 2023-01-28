@@ -30,6 +30,7 @@ namespace MvcSocialWeb.ViewModels.Users
         public DateTime BirthDate { get; set; }
 
         [Display(Name = "Фото")]
+        [DataType(DataType.ImageUrl)]
         public string Image { get; set; }
 
         [Display(Name = "Статус")]

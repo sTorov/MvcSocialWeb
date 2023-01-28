@@ -228,6 +228,10 @@
     padding: 3%;
 }
 
+.textarea{
+    resize: none;
+}
+
 /*---------------------------*/
 
 .center {
@@ -275,7 +279,15 @@
     width: initial;
 }
 
-.flex-col{
+.width-500 {
+    width: 500px;
+}
+
+.width-35p{
+    width: 35%;
+}
+
+.flex-col {
     display: flex;
     flex-direction: column;
 }
@@ -285,9 +297,22 @@
     align-items: center;
 }
 
+.flex-alitem-start {
+    display: flex;
+    align-items: start;
+}
+
 .flex-space-between {
     display: flex;
     justify-content: space-between;
+}
+
+.flex-20{
+    flex: 20%;
+}
+
+.flex-50{
+    flex: 50%;
 }
 
 .margin_7 {

@@ -83,5 +83,16 @@ namespace MvcSocialWeb.Controllers
             var result = _userManager.GetUserAsync(User);
             return View("User", new UserViewModel(result.Result));
         }
+
+        /// <summary>
+        /// Редактирование учетной записи
+        /// </summary>
+        [HttpGet]
+        [Route("Edit")]
+        [Authorize]
+        public IActionResult Edit()
+        {
+            return View();
+        }
     }
 }
