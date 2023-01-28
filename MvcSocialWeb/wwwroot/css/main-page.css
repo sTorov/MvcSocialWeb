@@ -163,7 +163,7 @@
     transition: .2s;
 }
 
-    .btn_submit:hover {
+    .btn_submit:hover, .btn_submit:focus {
         background-color: #2d9649;
         transition: .2s;
     }
@@ -173,7 +173,7 @@
     transition: .2s;
 }
 
-    .enter_submit:hover {
+    .enter_submit:hover, .enter_submit:focus {
         background-color: #3a5ec9;
         transition: .2s;
     }
@@ -194,7 +194,42 @@
     color: #999;
 }
 
+.user-container{
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.main-user{
+    flex: 55%;
+}
+
+.user-side{
+    flex: 40%;
+    margin-right: 5%;
+}
+
+.info{
+    border-top: 1px dashed lightgray;
+    border-bottom: 1px dashed lightgray;
+    margin: 2% 0;
+    padding-left: 2%;
+}
+
+.text{
+    margin: 3% 0;
+}
+
+.title{
+    margin-bottom: 3%;
+}
+
+.wrapper{
+    margin-top: 2%;
+    padding: 3%;
+}
+
 /*---------------------------*/
+
 .center {
     justify-content: center;
     text-align: center;
@@ -210,6 +245,10 @@
 
 .text-color-gray {
     color: gray;
+}
+
+.text-color-lightgray{
+    color: darkgray;
 }
 
 .default-color {

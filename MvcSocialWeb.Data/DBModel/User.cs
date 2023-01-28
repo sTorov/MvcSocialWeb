@@ -10,18 +10,16 @@ namespace MvcSocialWeb.Data.DBModel
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? MiddleName { get; set; }
-        public DateTime? BirthDate { get; set; }
-        public string Image { get; set; }
-        public string Status { get; set; }
-        public string About { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string? Image { get; set; }
+        public string? Status { get; set; }
+        public string? About { get; set; }
 
-        public User() { }
-
-        public User(string image, string status, string about)
+        public User()
         {
-            Image = image;
-            Status = status;
-            About = about;
+            Image = "https://via.placeholder.com/500";
+            Status = "Ура! Я в соцсети!";
+            About = "Информация обо мне.";
         }
 
         public string GetFullName() => $"{FirstName} {MiddleName} {LastName}";
