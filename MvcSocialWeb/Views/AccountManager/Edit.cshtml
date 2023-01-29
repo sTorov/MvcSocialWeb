@@ -7,12 +7,17 @@
     ViewData["Title"] = "Обновление учетных данных";
     var user = await UserManager.GetUserAsync(User);
     var birthDate = string.Join("-", user.BirthDate.ToString("d").Split(".").Reverse());
-    
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.js"></script>
+
+<script>
+    window.addEventListener('load', () => {
+        document.querySelector('.textarea').value = @(Html.Raw(user.GetNormalizedAbout()));
+    });
+</script>
 
 <div class="background-white wrapper">
     <h2 class="center title">Редактирование пользователя</h2>
@@ -85,9 +90,9 @@
         </div>
 
         <div class="margin_7 flex-col">
-            <div class="flex-alitem-center">
+            <div class="flex-alitem-start">
                 <label asp-for="About" class="flex-20"></label>
-                <input asp-for="About" class="form-control flex-50" placeholder="Введите описание" value="@user.About">
+                <textarea rows="5" asp-for="About" class="textarea form-control flex-50" placeholder="Введите описание"></textarea>
             </div>
             <span asp-validation-for="About" class="text-danger text-size_12 right-pos-messsage"></span>
         </div>

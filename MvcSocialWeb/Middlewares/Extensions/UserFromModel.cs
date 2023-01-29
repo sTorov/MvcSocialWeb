@@ -14,7 +14,7 @@ namespace MvcSocialWeb.Middlewares.Extensions
             user.Email = model.Email;
             user.BirthDate = model.BirthDate;
             user.Status = model.Status;
-            user.About = model.About;
+            user.About = model.About?.ReplaceQuotes();
             user.Image = model.Image;
 
             return user;

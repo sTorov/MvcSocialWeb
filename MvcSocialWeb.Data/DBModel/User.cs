@@ -23,5 +23,7 @@ namespace MvcSocialWeb.Data.DBModel
         }
 
         public string GetFullName() => $"{FirstName} {MiddleName} {LastName}";
+
+        public string GetNormalizedAbout() => $"\"{About}\"";
     }
 }
