@@ -13,7 +13,7 @@ namespace MvcSocialWeb.ViewModels.Users
         public string LastName { get; set; }
 
         [Display(Name = "Отчество")]
-        public string MiddleName { get; set; }
+        public string? MiddleName { get; set; }
 
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
         [Display(Name = "Никнейм")]
@@ -25,18 +25,18 @@ namespace MvcSocialWeb.ViewModels.Users
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [Display(Name = "Дата рождения")]
         public DateTime BirthDate { get; set; }
 
         [Display(Name = "Фото")]
         [DataType(DataType.ImageUrl)]
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         [Display(Name = "Статус")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         [Display(Name = "О себе")]
-        public string About { get; set; }
+        public string? About { get; set; }
     }
 }

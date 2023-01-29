@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.Data.DBModel;
 using MvcSocialWeb.ViewModels.Users;
 using MvcSocialWeb.ViewModels.Account;
+using MvcSocialWeb.Middlewares.Extensions;
+
 
 namespace MvcSocialWeb.Controllers
 {
@@ -57,7 +59,7 @@ namespace MvcSocialWeb.Controllers
                 else
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new AccountView(model));
         }
 
         /// <summary>
@@ -84,15 +86,47 @@ namespace MvcSocialWeb.Controllers
             return View("User", new UserViewModel(result.Result));
         }
 
-        /// <summary>
-        /// Редактирование учетной записи
-        /// </summary>
         [HttpGet]
         [Route("Edit")]
         [Authorize]
         public IActionResult Edit()
         {
             return View();
+        }
+
+        /// <summary>
+        /// Редактирование учетной записи
+        /// </summary>
+        [HttpPost]
+        [Route("Update")]
+        [Authorize]
+        public async Task<IActionResult> Update(UserEditViewModel model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            var checkName = _userManager.FindByNameAsync(model.UserName).Result?.UserName;
+            if (checkName != null && user.UserName != checkName)
+                ModelState.AddModelError(string.Empty, $"Пользователь именем {model.UserName} уже существует!");
+
+            var checkEmail = _userManager.FindByEmailAsync(model.Email).Result?.Email;
+            if (checkEmail != null && user.Email != checkEmail)
+                ModelState.AddModelError(string.Empty, $"Адрес {model.Email} уже зарегистрирован!");
+
+            if (ModelState.IsValid)
+            {
+                user.Convert(model);
+
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                    return RedirectToAction("MyPage", "AccountManager");
+                else
+                    return RedirectToAction("Edit", "AccountManager");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Некорректные данные");
+                return View("Edit", model);
+            }
         }
     }
 }

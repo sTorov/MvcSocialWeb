@@ -52,6 +52,14 @@ namespace MvcSocialWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            var checkName = _userManager.FindByNameAsync(model.Login).Result?.UserName;
+            if (checkName != null)
+                ModelState.AddModelError(string.Empty, $"Пользователь именем {model.Login} уже существует!");
+
+            var checkEmail = _userManager.FindByEmailAsync(model.EmailReg).Result?.Email;
+            if (checkEmail != null)
+                ModelState.AddModelError(string.Empty, $"Адрес {model.EmailReg} уже зарегистрирован!");
+
             if (ModelState.IsValid) 
             {
                 var user = _mapper.Map<User>(model);

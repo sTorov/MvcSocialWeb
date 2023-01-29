@@ -20,7 +20,7 @@ namespace MvcSocialWeb.Controllers
         /// <summary>
         /// Отображение главной страницы
         /// </summary>
-        public IActionResult Index()
+        public IActionResult Index(AccountView model)
         {
             if(User.Identity.IsAuthenticated)
             {
@@ -28,7 +28,7 @@ namespace MvcSocialWeb.Controllers
                 return RedirectToAction("MyPage", "AccountManager", new UserViewModel(taskUser.Result));
             }
             else
-                return View(new AccountView());
+                return View(model);
         }
 
         /// <summary>

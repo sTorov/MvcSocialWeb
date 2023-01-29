@@ -10,8 +10,8 @@
 
 <div class="block-reg background-white">
     <h4 class="center margin-bottom_15">Добро пожаловать!</h4>
-    <form method="post" asp-controller="AccountManager" asp-action="Login" autocomplete="off">
-        <div asp-validation-summary="ModelOnly"></div>
+    <form method="post" asp-controller="AccountManager" asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="text-size_12 text-danger"></div>
         <div>
             <div class="mrgn">
                 <input asp-for="UserEmail" class="form-control" placeholder="Введите email" />

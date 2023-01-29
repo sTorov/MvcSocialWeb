@@ -63,6 +63,15 @@
     border-color: red;
 }
 
+.validation-summary-errors {
+    background: antiquewhite;
+    text-align: center;
+}
+
+.validation-summary-errors > ul{
+    list-style-type: none;
+}
+
 .block-reg {
     padding: 40px;
     margin: 30px;
@@ -94,7 +103,8 @@
 .frm {
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     margin: 0 auto;
 }
 
@@ -234,6 +244,10 @@
 
 /*---------------------------*/
 
+.display-none{
+    display: none;
+}
+
 .center {
     justify-content: center;
     text-align: center;
@@ -271,6 +285,10 @@
     margin-bottom: 40px;
 }
 
+.margin-side-25p{
+    margin: 0 25%;
+}
+
 .right-pos-messsage {
     align-self: end;
 }
@@ -279,8 +297,8 @@
     width: initial;
 }
 
-.width-500 {
-    width: 500px;
+.max-width-500 {
+    max-width: 500px;
 }
 
 .width-35p{
