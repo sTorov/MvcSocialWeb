@@ -1,0 +1,14 @@
+﻿@model MvcSocialWeb.ViewModels.Users.SearchViewModel
+
+@{
+    ViewData["Title"] = "Поиск пользователей";
+}
+
+<div class="block-reg background-white">
+    @foreach(var user in Model.FindUsers)
+    {
+        <div>
+            <label>@user.GetFullName()</label>
+        </div>
+    }
+</div>

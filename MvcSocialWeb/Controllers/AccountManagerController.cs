@@ -128,5 +128,19 @@ namespace MvcSocialWeb.Controllers
                 return View("Edit", model);
             }
         }
+
+        /// <summary>
+        /// Поиск пользователей
+        /// </summary>
+        [HttpPost]
+        [Route("Search")]
+        public IActionResult UserList()
+        {
+            var model = new SearchViewModel()
+            {
+                FindUsers = _userManager.Users.ToArray()
+            };
+            return View(model);
+        }
     }
 }
