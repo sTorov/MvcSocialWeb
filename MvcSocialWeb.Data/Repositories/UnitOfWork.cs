@@ -13,8 +13,6 @@ namespace MvcSocialWeb.Data.Repositories
             _context = context;
         }
 
-        public void Dispose() { }
-
         public IRepository<TEntity> GetRepository<TEntity>(bool hasCustomRepository = true) where TEntity : class
         {
             if(_repositories == null)
@@ -36,7 +34,27 @@ namespace MvcSocialWeb.Data.Repositories
 
         public int SaveChanges(bool ensureAutoHistory = false)
         {
-            return default;
+            return _context.SaveChanges(ensureAutoHistory);
+        }
+
+
+        private bool isDisposed = false;
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (isDisposed)
+                return;
+
+            if(disposing)
+                _context.Dispose();
+
+            isDisposed = true;
         }
     }
 }

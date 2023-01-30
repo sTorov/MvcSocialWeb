@@ -3,7 +3,7 @@
     /// <summary>
     /// Интерфейс для получение любого реализованного репозитория
     /// </summary>
-    internal interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         /// <summary>
         /// Сохранение изменений в базе данных
