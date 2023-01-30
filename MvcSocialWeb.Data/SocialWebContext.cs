@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MvcSocialWeb.Data.DBModel;
+using MvcSocialWeb.Data.DBModel.Friend;
 
 namespace MvcSocialWeb.Data
 {
@@ -12,6 +13,13 @@ namespace MvcSocialWeb.Data
         public SocialWebContext(DbContextOptions<SocialWebContext> options) : base(options)
         {
             Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.ApplyConfiguration(new FriendConfiguration());
         }
     }
 }
