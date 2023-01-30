@@ -12,7 +12,7 @@
         /// <summary>
         /// Получение объекта <typeparamref name="T"/>
         /// </summary>
-        T Get(int id);
+        T? Get(int id);
         /// <summary>
         /// Создание объекта <typeparamref name="T"/>
         /// </summary>
@@ -24,6 +24,6 @@
         /// <summary>
         /// Удаление объекта <typeparamref name="T"/>
         /// </summary>
-        void Delete(int id);
+        void Delete(T item);
     }
 }
