@@ -20,15 +20,15 @@ namespace MvcSocialWeb.Controllers
         /// <summary>
         /// Отображение главной страницы
         /// </summary>
-        public IActionResult Index(AccountView model)
+        public IActionResult Index()
         {
             if(User.Identity.IsAuthenticated)
             {
                 var taskUser = _userManager.GetUserAsync(User);
-                return RedirectToAction("MyPage", "AccountManager", new UserViewModel(taskUser.Result));
+                return RedirectToAction("MyPage", "AccountManager");
             }
             else
-                return View(model);
+                return View(new AccountView());
         }
 
         /// <summary>

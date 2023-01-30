@@ -54,12 +54,12 @@ namespace MvcSocialWeb.Controllers
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                         return Redirect(model.ReturnUrl);
                     else
-                        return RedirectToAction("MyPage", new UserViewModel(user));
+                        return RedirectToAction("MyPage");
                 }
                 else
-                    ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                    ModelState.AddModelError("", "Неправильный email и (или) пароль");
             }
-            return RedirectToAction("Index", "Home", new AccountView(model));
+            return View("/Views/Home/Index.cshtml", new AccountView(model));
         }
 
         /// <summary>
@@ -106,11 +106,11 @@ namespace MvcSocialWeb.Controllers
 
             var checkName = _userManager.FindByNameAsync(model.UserName).Result?.UserName;
             if (checkName != null && user.UserName != checkName)
-                ModelState.AddModelError(string.Empty, $"Пользователь именем {model.UserName} уже существует!");
+                ModelState.AddModelError(string.Empty, $"Пользователь никнеймом '{model.UserName}' уже существует!");
 
             var checkEmail = _userManager.FindByEmailAsync(model.Email).Result?.Email;
             if (checkEmail != null && user.Email != checkEmail)
-                ModelState.AddModelError(string.Empty, $"Адрес {model.Email} уже зарегистрирован!");
+                ModelState.AddModelError(string.Empty, $"Адрес '{model.Email}' уже зарегистрирован!");
 
             if (ModelState.IsValid)
             {

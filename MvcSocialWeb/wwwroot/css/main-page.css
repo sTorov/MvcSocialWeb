@@ -70,6 +70,8 @@
 
 .validation-summary-errors > ul{
     list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .block-reg {
@@ -207,6 +209,12 @@
 .user-container{
     display: flex;
     margin-bottom: 40px;
+}
+
+.user-image {
+    max-width: 500px;
+    width: 100%;
+    align-self: center;
 }
 
 .main-user{

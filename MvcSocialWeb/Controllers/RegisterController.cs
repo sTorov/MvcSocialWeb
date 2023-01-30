@@ -68,7 +68,7 @@ namespace MvcSocialWeb.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user,  false);
-                    return RedirectToAction("MyPage", "AccountManager", new UserViewModel(user));
+                    return RedirectToAction("MyPage", "AccountManager");
                 }
                 else
                 {
