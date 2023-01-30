@@ -5,10 +5,16 @@
 }
 
 <div class="block-reg background-white">
-    @foreach(var user in Model.FindUsers)
+    @if (Model.FindUsers.Count == 0)
     {
-        <div>
-            <label>@user.GetFullName()</label>
-        </div>
+        <label>Поиск не дал результатов!</label>
+    }
+    else{
+        @foreach (var user in Model.FindUsers)
+        {
+            <div>
+                <label>@user.GetFullName()</label>
+            </div>
+        }
     }
 </div>

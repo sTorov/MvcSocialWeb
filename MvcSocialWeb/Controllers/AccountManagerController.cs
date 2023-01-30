@@ -134,11 +134,15 @@ namespace MvcSocialWeb.Controllers
         /// </summary>
         [HttpPost]
         [Route("Search")]
-        public IActionResult UserList()
+        public IActionResult UserList(string search = "")
         {
+
             var model = new SearchViewModel()
             {
-                FindUsers = _userManager.Users.ToArray()
+                FindUsers = _userManager.Users
+                .AsEnumerable()
+                .Where(u => u.GetFullName().ToLower().Contains(search.ToLower()))
+                .ToList()
             };
             return View(model);
         }
