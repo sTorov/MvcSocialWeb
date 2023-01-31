@@ -22,6 +22,19 @@
             </div>
             <div class="info">
                 <p class="text-color-lightgray text">Список друзей</p>
+                @if(Model.Friends.Count != 0)
+                {
+                    @foreach(var friend in Model.Friends)
+                    {
+                        <div>
+                            <label>@friend.GetFullName()</label>
+                            <img src="@friend.Image" width="50" />
+                            <form method="post" asp-controller="Friend" asp-action="DeleteFriend" asp-route-id="@friend.Id">
+                                <button type="submit" class="">Удалить из друзей</button>
+                            </form>
+                        </div>
+                    }
+                }
             </div>
         </main>
     </div>

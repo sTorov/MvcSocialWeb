@@ -6,6 +6,9 @@ using MvcSocialWeb.ViewModels.Users;
 using MvcSocialWeb.ViewModels.Account;
 using MvcSocialWeb.Middlewares.Extensions;
 using MvcSocialWeb.Data.DBModel.Users;
+using MvcSocialWeb.Data.Repositories.Interfaces;
+using MvcSocialWeb.Data.DBModel.Friend;
+using MvcSocialWeb.Data.Repositories;
 
 namespace MvcSocialWeb.Controllers
 {
@@ -16,11 +19,13 @@ namespace MvcSocialWeb.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AccountManagerController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper)
+        public AccountManagerController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -77,12 +82,18 @@ namespace MvcSocialWeb.Controllers
         [HttpGet]
         [Route("MyPage")]
         [Authorize]
-        public IActionResult MyPage()
+        public async Task<IActionResult> MyPage()
         {
-            var result = _userManager.GetUserAsync(User);
-            return View("User", new UserViewModel(result.Result));
+            var user = User;
+            var result = await _userManager.GetUserAsync(user);
+            var model = new UserViewModel(result, await GetFriends());
+
+            return View("User", model);
         }
 
+        /// <summary>
+        /// Страница редактирования профиля
+        /// </summary>
         [HttpGet]
         [Route("Edit")]
         [Authorize]
@@ -124,6 +135,18 @@ namespace MvcSocialWeb.Controllers
                 ModelState.AddModelError("", "Некорректные данные");
                 return View("Edit", model);
             }
+        }
+
+        /// <summary>
+        /// Получение списка друзей пользователя
+        /// </summary>
+        private async Task<List<User>> GetFriends()
+        {
+            var user = User;
+            var currentUser = await _userManager.GetUserAsync(User);
+            var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
+
+            return repo.GetFriendsByUser(currentUser);
         }
     }
 }

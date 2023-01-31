@@ -30,7 +30,9 @@ namespace MvcSocialWeb.Data.Repositories
 
         public List<User> GetFriendsByUser(User target)
         {
-            var friends = Set.Include(x => x.CurrentFriend)
+            var friends = Set
+                .Include(x => x.CurrentFriend)
+                .Include(x => x.User)
                 .AsEnumerable()
                 .Where(x => x.User.Id == target.Id)
                 .Select(x => x.CurrentFriend);
