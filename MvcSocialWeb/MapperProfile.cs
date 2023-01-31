@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MvcSocialWeb.Data.DBModel;
+using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.ViewModels.Account;
 
 namespace MvcSocialWeb

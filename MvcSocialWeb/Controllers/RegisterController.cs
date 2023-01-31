@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MvcSocialWeb.Data.DBModel;
+using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.ViewModels;
 using MvcSocialWeb.ViewModels.Account;
 using MvcSocialWeb.ViewModels.Users;

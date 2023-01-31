@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MvcSocialWeb.Data.DBModel;
 using MvcSocialWeb.ViewModels;
 using MvcSocialWeb.ViewModels.Users;
 using MvcSocialWeb.ViewModels.Account;
 using System.Diagnostics;
+using MvcSocialWeb.Data.DBModel.Users;
 
 namespace MvcSocialWeb.Controllers
 {

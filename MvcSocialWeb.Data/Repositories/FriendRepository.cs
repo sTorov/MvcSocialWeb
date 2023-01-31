@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MvcSocialWeb.Data.DBModel;
 using MvcSocialWeb.Data.DBModel.Friend;
+using MvcSocialWeb.Data.DBModel.Users;
 
 namespace MvcSocialWeb.Data.Repositories
 {

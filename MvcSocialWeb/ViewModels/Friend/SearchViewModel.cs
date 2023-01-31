@@ -1,6 +1,6 @@
-﻿using MvcSocialWeb.Data.DBModel;
+﻿using MvcSocialWeb.Data.DBModel.Users;
 
-namespace MvcSocialWeb.ViewModels.Users
+namespace MvcSocialWeb.ViewModels.Friend
 {
     public class SearchViewModel
     {

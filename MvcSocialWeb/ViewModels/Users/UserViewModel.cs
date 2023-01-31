@@ -1,4 +1,4 @@
-﻿using MvcSocialWeb.Data.DBModel;
+﻿using MvcSocialWeb.Data.DBModel.Users;
 
 namespace MvcSocialWeb.ViewModels.Users
 {

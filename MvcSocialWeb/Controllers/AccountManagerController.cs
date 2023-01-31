@@ -2,11 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MvcSocialWeb.Data.DBModel;
 using MvcSocialWeb.ViewModels.Users;
 using MvcSocialWeb.ViewModels.Account;
 using MvcSocialWeb.Middlewares.Extensions;
-
+using MvcSocialWeb.Data.DBModel.Users;
 
 namespace MvcSocialWeb.Controllers
 {
@@ -15,7 +14,6 @@ namespace MvcSocialWeb.Controllers
     /// </summary>
     public class AccountManagerController : Controller
     {
-        private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
@@ -23,7 +21,6 @@ namespace MvcSocialWeb.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _mapper = mapper;
         }
 
         /// <summary>
@@ -127,24 +124,6 @@ namespace MvcSocialWeb.Controllers
                 ModelState.AddModelError("", "Некорректные данные");
                 return View("Edit", model);
             }
-        }
-
-        /// <summary>
-        /// Поиск пользователей
-        /// </summary>
-        [HttpPost]
-        [Route("Search")]
-        public IActionResult UserList(string search = "")
-        {
-
-            var model = new SearchViewModel()
-            {
-                FindUsers = _userManager.Users
-                .AsEnumerable()
-                .Where(u => u.GetFullName().ToLower().Contains(search.ToLower()))
-                .ToList()
-            };
-            return View(model);
         }
     }
 }

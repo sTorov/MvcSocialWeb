@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace MvcSocialWeb.Data.DBModel
+namespace MvcSocialWeb.Data.DBModel.Users
 {
     /// <summary>
     /// Модель пользователя

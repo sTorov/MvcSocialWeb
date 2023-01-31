@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MvcSocialWeb.Data;
-using MvcSocialWeb.Data.DBModel;
 using MvcSocialWeb.Data.DBModel.Friend;
+using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Data.Repositories;
 using MvcSocialWeb.Data.Repositories.Interfaces;
 using System.Reflection;
@@ -20,7 +20,6 @@ namespace MvcSocialWeb
             var connection = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<SocialWebContext>(option => option.UseSqlServer(connection));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            /* => ???*/
             builder.Services.AddScoped<IRepository<Friend>, FriendRepository>();
 
             var assembly = Assembly.GetAssembly(typeof(MapperProfile));

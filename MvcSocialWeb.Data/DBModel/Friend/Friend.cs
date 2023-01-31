@@ -1,4 +1,6 @@
-﻿namespace MvcSocialWeb.Data.DBModel.Friend
+﻿using MvcSocialWeb.Data.DBModel.Users;
+
+namespace MvcSocialWeb.Data.DBModel.Friend
 {
     public class Friend
     {
