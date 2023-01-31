@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.Data.DBModel.Friend;
@@ -26,10 +27,32 @@ namespace MvcSocialWeb.Controllers
         }
 
         /// <summary>
+        /// Добавление пользователя в друзья
+        /// </summary>
+        [HttpPost]
+        [Route("AddFriend")]
+        [Authorize]
+        public async Task<IActionResult> AddFriend(string id)
+        {
+            var user = User;
+            var currentUser = await _userManager.GetUserAsync(user);
+
+            var friend = await _userManager.FindByIdAsync(id);
+
+            var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
+
+            repo.AddFriend(currentUser, friend);
+            repo.AddFriend(friend, currentUser);
+
+            return RedirectToAction("MyPage", "AccountManager");
+        }
+
+        /// <summary>
         /// Поиск пользователей
         /// </summary>
         [HttpGet]
         [Route("Search")]
+        [Authorize]
         public async Task<IActionResult> UserList(string search)
         {
             var model = await CreateSearch(search);
