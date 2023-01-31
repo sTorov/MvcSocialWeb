@@ -4,6 +4,11 @@ namespace MvcSocialWeb.ViewModels.Friend
 {
     public class SearchViewModel
     {
-        public List<User> FindUsers { get; set; }
+        public List<UserWithFriendExt> FindUsers { get; set; }
+
+        public SearchViewModel()
+        {
+            FindUsers= new List<UserWithFriendExt>();
+        }
     }
 }

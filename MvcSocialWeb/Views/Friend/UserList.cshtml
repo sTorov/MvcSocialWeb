@@ -14,6 +14,11 @@
         {
             <div>
                 <label>@user.GetFullName()</label>
+                @if (!user.IsFriendWithCurrent){
+                    <form method="post" asp-controller="Friend" asp-action="AddFriend" asp-route-id="@user.Id">
+                        <button type="submit" class="">Добавить в друзья</button>
+                    </form>
+                }
             </div>
         }
     }
