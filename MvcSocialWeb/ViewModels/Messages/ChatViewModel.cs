@@ -8,8 +8,8 @@ namespace MvcSocialWeb.ViewModels.Messages
     /// </summary>
     public class ChatViewModel
     {
-        public User Sender{ get; set; }
-        public User Recipient { get; set; }
+        public User Friend{ get; set; }
+        public User User { get; set; }
         public List<Message> History { get; set; }
         public MessageViewModel NewMessage { get; set; }
 

@@ -6,6 +6,7 @@ using MvcSocialWeb.Data.DBModel.Friend;
 using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Data.Repositories;
 using MvcSocialWeb.Data.Repositories.Interfaces;
+using MvcSocialWeb.Middlewares.Services;
 using MvcSocialWeb.ViewModels.Friend;
 using System.Security.Claims;
 
@@ -19,12 +20,14 @@ namespace MvcSocialWeb.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserServices _userServices;
 
-        public FriendController(UserManager<User> userManager, IMapper mapper, IUnitOfWork unitOfWork)
+        public FriendController(UserManager<User> userManager, IMapper mapper, IUnitOfWork unitOfWork, UserServices userServices)
         {
             _userManager = userManager;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _userServices = userServices;
         }
 
         /// <summary>
@@ -35,7 +38,7 @@ namespace MvcSocialWeb.Controllers
         [Authorize]
         public async Task<IActionResult> AddFriend(string id)
         {
-            var items = await GetItemForManipulation(User, id);
+            var items = await _userServices.GetItemForManipulation<Friend, FriendRepository>(User, id);
 
             await items.repo!.AddFriend(items.user!, items.friend!);
             await items.repo!.AddFriend(items.friend!, items.user!);
@@ -51,7 +54,7 @@ namespace MvcSocialWeb.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteFriend(string id)
         {
-            var items = await GetItemForManipulation(User, id);
+            var items = await _userServices.GetItemForManipulation<Friend, FriendRepository>(User, id);
 
             await items.repo!.DeleteFriend(items.user!, items.friend!);
             await items.repo!.DeleteFriend(items.friend!, items.user!);
@@ -69,18 +72,6 @@ namespace MvcSocialWeb.Controllers
         {
             var model = await CreateSearch(search);
             return View(model);
-        }
-
-        /// <summary>
-        /// Получение кортежа с текущим пользователем, пользователем с указанным id и репозиторием FriendRepository
-        /// </summary>
-        private async Task<(User? user, User? friend, FriendRepository? repo)> GetItemForManipulation(ClaimsPrincipal claims, string id)
-        {
-            var currentUser = await _userManager.GetUserAsync(claims);
-            var friend = await _userManager.FindByIdAsync(id);
-            var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
-
-            return (currentUser, friend, repo);
         }
 
         /// <summary>

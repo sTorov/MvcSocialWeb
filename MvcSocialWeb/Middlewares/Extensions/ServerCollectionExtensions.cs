@@ -31,7 +31,7 @@ namespace MvcSocialWeb.Middlewares.Extensions
         /// </summary>
         public static IServiceCollection AddUserValidation(this IServiceCollection services) 
         {
-            services.AddScoped<UserValidation>();
+            services.AddScoped<UserServices>();
             return services;
         }
     }

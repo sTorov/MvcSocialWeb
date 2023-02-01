@@ -21,9 +21,9 @@ namespace MvcSocialWeb.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserValidation _userValidation;
+        private readonly UserServices _userValidation;
 
-        public AccountManagerController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IUnitOfWork unitOfWork, UserValidation userValidation)
+        public AccountManagerController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IUnitOfWork unitOfWork, UserServices userValidation)
         {
             _userManager = userManager;
             _signInManager = signInManager;

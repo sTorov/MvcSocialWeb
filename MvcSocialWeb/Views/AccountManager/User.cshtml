@@ -30,6 +30,9 @@
                             <div class="user-block flex-col">
                                 <img class="user-block__img width-100" src="@friend.Image" width="50" />
                                 <label>@friend.UserName</label>
+                                <form method="post" asp-controller="Message" asp-action="" asp-route-id="@friend.Id">
+                                    <button type="submit" class="primary_btn">Чат</button>
+                                </form>
                                 <form method="post" asp-controller="Friend" asp-action="DeleteFriend" asp-route-id="@friend.Id">
                                     <button type="submit" class="primary_btn">Удалить из друзей</button>
                                 </form>

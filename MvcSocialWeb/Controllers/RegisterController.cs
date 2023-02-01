@@ -5,7 +5,6 @@ using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Middlewares.Services;
 using MvcSocialWeb.ViewModels;
 using MvcSocialWeb.ViewModels.Account;
-using MvcSocialWeb.ViewModels.Users;
 using System.Diagnostics;
 
 namespace MvcSocialWeb.Controllers
@@ -18,14 +17,14 @@ namespace MvcSocialWeb.Controllers
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly UserValidation _userValidation;
+        private readonly UserServices _userServices;
 
-        public RegisterController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, UserValidation userValidation)
+        public RegisterController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, UserServices userValidation)
         {
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
-            _userValidation = userValidation;
+            _userServices = userValidation;
         }
 
         /// <summary>
@@ -55,7 +54,7 @@ namespace MvcSocialWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            await _userValidation.CheckDataAtRegistration(this, model.Login, model.EmailReg);
+            await _userServices.CheckDataAtRegistration(this, model.Login, model.EmailReg);
 
             if (ModelState.IsValid) 
             {
