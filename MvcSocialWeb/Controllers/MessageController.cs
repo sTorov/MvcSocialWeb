@@ -30,7 +30,7 @@ namespace MvcSocialWeb.Controllers
         {
             var items = await _userServices.GetItemForManipulation<Message, MessageRepository>(User, id);
 
-            var model = GetCharModelView(items.user!, items.friend!, items.repo!);
+            var model = await GetCharModelView(items.user!, items.friend!, items.repo!);
 
             return View(model);
         }
@@ -54,7 +54,7 @@ namespace MvcSocialWeb.Controllers
 
             await items.repo?.CreateAsync(newMessage)!;
 
-            var model = GetCharModelView(items.user!, items.friend!, items.repo!);
+            var model = await GetCharModelView(items.user!, items.friend!, items.repo!);
             
             return View(model);
         }
@@ -66,12 +66,14 @@ namespace MvcSocialWeb.Controllers
         {
             var history = await repo.GetMessages(user, friend);
 
-            return new ChatViewModel()
+            var model = new ChatViewModel()
             {
                 User = user,
                 Friend = friend,
                 History = history
             };
+
+            return model;
         }
     }
 }
