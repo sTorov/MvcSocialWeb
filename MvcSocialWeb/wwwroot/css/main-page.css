@@ -273,8 +273,14 @@
     align-items: center;
 }
 
+.info-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .info .user-block {
-    max-width: fit-content;
+    flex-basis: 29%;
+    min-width: fit-content;
 }
 
 .info .user-block__img {
@@ -353,11 +359,6 @@
 
 .width-35p{
     width: 35%;
-}
-
-.flex-wrap{
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .flex-col {

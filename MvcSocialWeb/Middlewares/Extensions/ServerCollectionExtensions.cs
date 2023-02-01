@@ -1,5 +1,6 @@
 ﻿using MvcSocialWeb.Data.Repositories;
 using MvcSocialWeb.Data.Repositories.Interfaces;
+using MvcSocialWeb.Middlewares.Services;
 
 namespace MvcSocialWeb.Middlewares.Extensions
 {
@@ -22,6 +23,15 @@ namespace MvcSocialWeb.Middlewares.Extensions
             where TRepository : Repository<TEntity>
         {
             services.AddScoped<IRepository<TEntity>, TRepository>();
+            return services;
+        }
+
+        /// <summary>
+        /// Добавление сервиса проверки введённых пользователем данных на наличие в БД
+        /// </summary>
+        public static IServiceCollection AddUserValidation(this IServiceCollection services) 
+        {
+            services.AddScoped<UserValidation>();
             return services;
         }
     }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.Data.DBModel.Users;
+using MvcSocialWeb.Middlewares.Services;
 using MvcSocialWeb.ViewModels;
 using MvcSocialWeb.ViewModels.Account;
 using MvcSocialWeb.ViewModels.Users;
@@ -17,12 +18,14 @@ namespace MvcSocialWeb.Controllers
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly UserValidation _userValidation;
 
-        public RegisterController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+        public RegisterController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, UserValidation userValidation)
         {
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
+            _userValidation = userValidation;
         }
 
         /// <summary>
@@ -52,7 +55,7 @@ namespace MvcSocialWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            await CheckUserData(model.Login, model.EmailReg);
+            await _userValidation.CheckDataAtRegistration(this, model.Login, model.EmailReg);
 
             if (ModelState.IsValid) 
             {
@@ -80,20 +83,6 @@ namespace MvcSocialWeb.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        /// <summary>
-        /// Проверка введённых пользователем данных на существование в БД
-        /// </summary>
-        private async Task CheckUserData(string login, string email)
-        {
-            var checkName = (await _userManager.FindByNameAsync(login))?.UserName;
-            if (checkName != null)
-                ModelState.AddModelError(string.Empty, $"Пользователь с никнеймом {login} уже существует!");
-
-            var checkEmail = (await _userManager.FindByEmailAsync(email))?.Email;
-            if (checkEmail != null)
-                ModelState.AddModelError(string.Empty, $"Адрес {email} уже зарегистрирован!");
         }
     }
 }

@@ -9,6 +9,7 @@ using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Data.Repositories.Interfaces;
 using MvcSocialWeb.Data.DBModel.Friend;
 using MvcSocialWeb.Data.Repositories;
+using MvcSocialWeb.Middlewares.Services;
 
 namespace MvcSocialWeb.Controllers
 {
@@ -20,12 +21,14 @@ namespace MvcSocialWeb.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserValidation _userValidation;
 
-        public AccountManagerController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IUnitOfWork unitOfWork)
+        public AccountManagerController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IUnitOfWork unitOfWork, UserValidation userValidation)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _unitOfWork = unitOfWork;
+            _userValidation = userValidation;
         }
 
         /// <summary>
@@ -86,7 +89,7 @@ namespace MvcSocialWeb.Controllers
         {
             var user = User;
             var result = await _userManager.GetUserAsync(user);
-            var model = new UserViewModel(result, await GetFriends());
+            var model = new UserViewModel(result!, await GetFriends());
 
             return View("User", model);
         }
@@ -113,7 +116,7 @@ namespace MvcSocialWeb.Controllers
             var user = User;
             var currentUser = await _userManager.GetUserAsync(user);
 
-            await CheckUserData(model.UserName, model.Email, currentUser!);
+            await _userValidation.CheckDataAtUpdate(this, model.UserName, model.Email, currentUser!);
 
             if (ModelState.IsValid)
             {
@@ -135,27 +138,13 @@ namespace MvcSocialWeb.Controllers
         /// <summary>
         /// Получение списка друзей пользователя
         /// </summary>
-        private async Task<List<User>> GetFriends()
+        private async Task<List<User>?> GetFriends()
         {
             var user = User;
-            var currentUser = await _userManager.GetUserAsync(User);
+            var currentUser = await _userManager.GetUserAsync(user);
             var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
 
-            return repo.GetFriendsByUser(currentUser);
-        }
-
-        /// <summary>
-        /// Проверка введённых данных пользователем на существование в БД
-        /// </summary>
-        private async Task CheckUserData(string login, string email, User user)
-        {
-            var checkName = (await _userManager.FindByNameAsync(login))?.UserName;
-            if (checkName != null && user.UserName != checkName)
-                ModelState.AddModelError(string.Empty, $"Пользователь с никнеймом '{login}' уже существует!");
-
-            var checkEmail = (await _userManager.FindByEmailAsync(email))?.Email;
-            if (checkEmail != null && user.Email != checkEmail)
-                ModelState.AddModelError(string.Empty, $"Адрес '{email}' уже зарегистрирован!");
+            return repo?.GetFriendsByUser(currentUser!);
         }
     }
 }

@@ -7,6 +7,7 @@ using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Data.Repositories;
 using MvcSocialWeb.Data.Repositories.Interfaces;
 using MvcSocialWeb.Middlewares.Extensions;
+using MvcSocialWeb.Middlewares.Services;
 using System.Reflection;
 
 namespace MvcSocialWeb
@@ -23,7 +24,8 @@ namespace MvcSocialWeb
             builder.Services.AddDbContext<SocialWebContext>(option => option.UseSqlServer(connection))
                 .AddUnitOfWork()
                 .AddCustomRepository<Friend, FriendRepository>()
-                .AddCustomRepository<Message, MessageRepository>();
+                .AddCustomRepository<Message, MessageRepository>()
+                .AddUserValidation();
 
             var assembly = Assembly.GetAssembly(typeof(MapperProfile));
             builder.Services.AddAutoMapper(assembly);
