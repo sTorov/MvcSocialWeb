@@ -4,7 +4,7 @@
     ViewData["Title"] = "Поиск пользователей";
 }
 
-<div class="block-reg background-white">
+<div class="block-reg wrapper-friend background-white">
     @if (Model.FindUsers.Count == 0)
     {
         <label>Поиск не дал результатов!</label>
@@ -12,11 +12,12 @@
     else{
         @foreach (var user in Model.FindUsers)
         {
-            <div>
+            <div class="user-block flex-col">
+                <img class="user-block__img width-100" src="@user.Image"/>
                 <label>@user.GetFullName()</label>
                 @if (!user.IsFriendWithCurrent){
                     <form method="post" asp-controller="Friend" asp-action="AddFriend" asp-route-id="@user.Id">
-                        <button type="submit" class="">Добавить в друзья</button>
+                        <button class="primary_btn" type="submit">Добавить в друзья</button>
                     </form>
                 }
             </div>
