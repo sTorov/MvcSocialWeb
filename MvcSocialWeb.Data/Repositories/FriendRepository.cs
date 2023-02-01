@@ -11,8 +11,6 @@ namespace MvcSocialWeb.Data.Repositories
         public async Task AddFriend(User target, User friend)
         {
             var friends = await Set.FirstOrDefaultAsync(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
-                //.AsEnumerable()
-                //.FirstOrDefault(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
 
             if(friends == null)
             {
@@ -43,8 +41,6 @@ namespace MvcSocialWeb.Data.Repositories
         public async Task DeleteFriend(User target, User friend)
         {
             var friends = await Set.FirstOrDefaultAsync(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
-                //.AsEnumerable()
-                //.FirstOrDefault(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
 
             if (friends != null)
                 await DeleteAsync(friends);
