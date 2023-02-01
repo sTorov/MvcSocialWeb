@@ -17,26 +17,26 @@ namespace MvcSocialWeb.Data.Repositories
             Set = set;
         }
 
-        public void Create(T item)
+        public async Task CreateAsync(T item)
         {
-            Set.Add(item);
-            _dbContext.SaveChanges();
+            await Set.AddAsync(item);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void Delete(T item)
+        public async Task DeleteAsync(T item)
         {
-            Set.Remove(item);
-            _dbContext.SaveChanges();
+            await Task.Run(() => Set.Remove(item));
+            await _dbContext.SaveChangesAsync();
         }
 
-        public T? Get(int id) => Set.Find(id);
+        public async Task<T?> GetAsync(int id) => await Set.FindAsync(id);
 
         public IEnumerable<T> GetAll() => Set;
 
-        public void Update(T item)
+        public async Task UpdateAsync(T item)
         {
-            Set.Update(item);
-            _dbContext.SaveChanges();
+            await Task.Run(() => Set.Update(item));
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

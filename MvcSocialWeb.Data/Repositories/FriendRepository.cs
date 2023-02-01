@@ -10,9 +10,9 @@ namespace MvcSocialWeb.Data.Repositories
 
         public void AddFriend(User target, User friend)
         {
-            var friends = Set
-                .AsEnumerable()
-                .FirstOrDefault(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
+            var friends = Set.FirstOrDefaultAsync(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
+                //.AsEnumerable()
+                //.FirstOrDefault(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
 
             if(friends == null)
             {

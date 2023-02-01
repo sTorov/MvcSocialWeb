@@ -12,18 +12,18 @@
         /// <summary>
         /// Получение объекта <typeparamref name="T"/>
         /// </summary>
-        T? Get(int id);
+        Task<T?> GetAsync(int id);
         /// <summary>
         /// Создание объекта <typeparamref name="T"/>
         /// </summary>
-        void Create(T item);
+        Task CreateAsync(T item);
         /// <summary>
         /// ОБновление объекта <typeparamref name="T"/>
         /// </summary>
-        void Update(T item);
+        Task UpdateAsync(T item);
         /// <summary>
         /// Удаление объекта <typeparamref name="T"/>
         /// </summary>
-        void Delete(T item);
+        Task DeleteAsync(T item);
     }
 }
