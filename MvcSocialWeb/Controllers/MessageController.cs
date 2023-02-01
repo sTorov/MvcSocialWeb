@@ -29,7 +29,6 @@ namespace MvcSocialWeb.Controllers
         public async Task<IActionResult> Chat([FromRoute]string id)
         {
             var items = await _userServices.GetItemForManipulation<Message, MessageRepository>(User, id);
-
             var model = await GetCharModelView(items.user!, items.friend!, items.repo!);
 
             return View(model);

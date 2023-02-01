@@ -24,7 +24,7 @@
             {
                 @foreach (var mess in Model.History)
                 {
-                    if (Model.User.Id == userId)
+                    if (mess.SenderId == userId)
                     {
                         <p class="message">@mess.Text</p>
                     }

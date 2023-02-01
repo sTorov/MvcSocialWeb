@@ -334,6 +334,7 @@
 
 .textarea{
     resize: none;
+    white-space: pre-wrap;
 }
 
 .wrapper-friend{
@@ -424,13 +425,23 @@
 }
 
 .message {
-    max-width: fit-content;
+    width: fit-content;
     background: #4c4a4a;
     border-radius: 15px;
     padding: 10px;
     color: whitesmoke;
     font-size: 0.9rem;
     margin: 1%;
+    max-width: 70%;
+    white-space: pre-wrap;
+}
+
+    .message.right-pos-messsage {
+        background: #5e5eac;
+    }
+
+.chat-wrapper .input-validation-error {
+    border-color: #ced4da;
 }
 
 /*---------------------------*/
