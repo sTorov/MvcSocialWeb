@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MvcSocialWeb.Data.DBModel.Friend;
+using MvcSocialWeb.Data.DBModel.Messages;
 using MvcSocialWeb.Data.DBModel.Users;
 
 namespace MvcSocialWeb.Data
@@ -20,6 +21,7 @@ namespace MvcSocialWeb.Data
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new FriendConfiguration());
+            builder.ApplyConfiguration(new MessageConfiguration());
         }
     }
 }

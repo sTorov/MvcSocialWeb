@@ -37,8 +37,8 @@ namespace MvcSocialWeb.Controllers
         {
             var items = await GetItemForManipulation(User, id);
 
-            items.repo.AddFriend(items.user, items.friend);
-            items.repo.AddFriend(items.friend, items.user);
+            items.repo!.AddFriend(items.user!, items.friend!);
+            items.repo!.AddFriend(items.friend!, items.user!);
 
             return RedirectToAction("MyPage", "AccountManager");
         }
@@ -53,8 +53,8 @@ namespace MvcSocialWeb.Controllers
         {
             var items = await GetItemForManipulation(User, id);
 
-            items.repo.DeleteFriend(items.user, items.friend);
-            items.repo.DeleteFriend(items.friend, items.user);
+            items.repo!.DeleteFriend(items.user!, items.friend!);
+            items.repo!.DeleteFriend(items.friend!, items.user!);
 
             return RedirectToAction("MyPage", "AccountManager");
         }
@@ -74,7 +74,7 @@ namespace MvcSocialWeb.Controllers
         /// <summary>
         /// Получение кортежа с текущим пользователем, пользователем с указанным id и репозиторием FriendRepository
         /// </summary>
-        private async Task<(User user, User friend, FriendRepository repo)> GetItemForManipulation(ClaimsPrincipal claims, string id)
+        private async Task<(User? user, User? friend, FriendRepository? repo)> GetItemForManipulation(ClaimsPrincipal claims, string id)
         {
             var currentUser = await _userManager.GetUserAsync(claims);
             var friend = await _userManager.FindByIdAsync(id);

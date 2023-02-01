@@ -52,13 +52,7 @@ namespace MvcSocialWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var checkName = _userManager.FindByNameAsync(model.Login).Result?.UserName;
-            if (checkName != null)
-                ModelState.AddModelError(string.Empty, $"Пользователь именем {model.Login} уже существует!");
-
-            var checkEmail = _userManager.FindByEmailAsync(model.EmailReg).Result?.Email;
-            if (checkEmail != null)
-                ModelState.AddModelError(string.Empty, $"Адрес {model.EmailReg} уже зарегистрирован!");
+            await CheckUserData(model.Login, model.EmailReg);
 
             if (ModelState.IsValid) 
             {
@@ -86,6 +80,20 @@ namespace MvcSocialWeb.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        /// <summary>
+        /// Проверка введённых пользователем данных на существование в БД
+        /// </summary>
+        private async Task CheckUserData(string login, string email)
+        {
+            var checkName = (await _userManager.FindByNameAsync(login))?.UserName;
+            if (checkName != null)
+                ModelState.AddModelError(string.Empty, $"Пользователь с никнеймом {login} уже существует!");
+
+            var checkEmail = (await _userManager.FindByEmailAsync(email))?.Email;
+            if (checkEmail != null)
+                ModelState.AddModelError(string.Empty, $"Адрес {email} уже зарегистрирован!");
         }
     }
 }
