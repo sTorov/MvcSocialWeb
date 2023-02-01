@@ -49,10 +49,11 @@ namespace MvcSocialWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.UserEmail);
-                var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
+                var result = await _signInManager.PasswordSignInAsync(user?.UserName ?? string.Empty, model.Password, model.RememberMe, false);
 
                 if (result.Succeeded)
                 {

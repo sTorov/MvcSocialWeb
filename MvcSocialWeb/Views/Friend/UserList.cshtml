@@ -13,11 +13,21 @@
         @foreach (var user in Model.FindUsers)
         {
             <div class="user-block flex-col">
-                <img class="user-block__img width-100" src="@user.Image"/>
-                <label>@user.GetFullName()</label>
+                <div class="flex-alitem-center flex-space-between">
+                    <img class="user-block__img" src="@user.Image" />
+                    <div class="flex-col user-block__label-block">
+                        <label>@user.GetFullName()</label>
+                        <label class="text-color-gray">@user.UserName</label>
+                    </div>
+                </div>
                 @if (!user.IsFriendWithCurrent){
-                    <form method="post" asp-controller="Friend" asp-action="AddFriend" asp-route-id="@user.Id">
+                    <form method="post" asp-controller="Friend" asp-action="AddFriend" asp-route-id="@user.Id" class="user-block__form">
                         <button class="primary_btn" type="submit">Добавить в друзья</button>
+                    </form>
+                } else
+                {
+                    <form class="user-block__form">
+                        <button class="primary_btn" disabled type="submit">Вы уже друзья!</button>
                     </form>
                 }
             </div>
