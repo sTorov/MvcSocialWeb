@@ -49,14 +49,14 @@ namespace MvcSocialWeb.Controllers
             {
                 Sender = items.user!,
                 Recipient = items.friend!,
-                Text = chat.NewMessage.Text
+                Text = chat.NewMessage.Text ?? string.Empty
             };
 
             await items.repo?.CreateAsync(newMessage)!;
 
             var model = await GetCharModelView(items.user!, items.friend!, items.repo!);
             
-            return View(model);
+            return View("Chat", model);
         }
 
         /// <summary>
