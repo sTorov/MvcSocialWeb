@@ -37,8 +37,8 @@ namespace MvcSocialWeb.Controllers
         {
             var items = await GetItemForManipulation(User, id);
 
-            items.repo!.AddFriend(items.user!, items.friend!);
-            items.repo!.AddFriend(items.friend!, items.user!);
+            await items.repo!.AddFriend(items.user!, items.friend!);
+            await items.repo!.AddFriend(items.friend!, items.user!);
 
             return RedirectToAction("MyPage", "AccountManager");
         }
@@ -53,8 +53,8 @@ namespace MvcSocialWeb.Controllers
         {
             var items = await GetItemForManipulation(User, id);
 
-            items.repo!.DeleteFriend(items.user!, items.friend!);
-            items.repo!.DeleteFriend(items.friend!, items.user!);
+            await items.repo!.DeleteFriend(items.user!, items.friend!);
+            await items.repo!.DeleteFriend(items.friend!, items.user!);
 
             return RedirectToAction("MyPage", "AccountManager");
         }
@@ -125,7 +125,7 @@ namespace MvcSocialWeb.Controllers
             var result = await _userManager.GetUserAsync(user);
             var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
             
-            return repo.GetFriendsByUser(result);
+            return await repo?.GetFriendsByUser(result);
         }
     }
 }

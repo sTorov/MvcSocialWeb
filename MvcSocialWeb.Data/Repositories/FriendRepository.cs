@@ -8,9 +8,9 @@ namespace MvcSocialWeb.Data.Repositories
     {
         public FriendRepository(SocialWebContext db) : base(db){ }
 
-        public void AddFriend(User target, User friend)
+        public async Task AddFriend(User target, User friend)
         {
-            var friends = Set.FirstOrDefaultAsync(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
+            var friends = await Set.FirstOrDefaultAsync(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
                 //.AsEnumerable()
                 //.FirstOrDefault(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
 
@@ -24,30 +24,30 @@ namespace MvcSocialWeb.Data.Repositories
                     CurrentFriend = friend
                 };
 
-                Create(item);
+                await CreateAsync(item);
             }
         }
 
-        public List<User> GetFriendsByUser(User target)
+        public async Task<List<User>> GetFriendsByUser(User target)
         {
             var friends = Set
-                .Include(x => x.CurrentFriend)
-                .Include(x => x.User)
-                .AsEnumerable()
-                .Where(x => x.User.Id == target.Id)
-                .Select(x => x.CurrentFriend);
+            .Include(x => x.CurrentFriend)
+            .Include(x => x.User)
+            .AsEnumerable()
+            .Where(x => x.User.Id == target.Id)
+            .Select(x => x.CurrentFriend);
 
-            return friends.ToList();
+            return await Task.Run(() => friends.ToList());
         }
 
-        public void DeleteFriend(User target, User friend)
+        public async Task DeleteFriend(User target, User friend)
         {
-            var friends = Set
-                .AsEnumerable()
-                .FirstOrDefault(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
+            var friends = await Set.FirstOrDefaultAsync(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
+                //.AsEnumerable()
+                //.FirstOrDefault(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
 
-            if(friends != null)
-                Delete(friends);
+            if (friends != null)
+                await DeleteAsync(friends);
         }
     }
 }

@@ -145,7 +145,7 @@ namespace MvcSocialWeb.Controllers
             var currentUser = await _userManager.GetUserAsync(user);
             var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
 
-            return repo?.GetFriendsByUser(currentUser!);
+            return await repo?.GetFriendsByUser(currentUser);
         }
     }
 }
