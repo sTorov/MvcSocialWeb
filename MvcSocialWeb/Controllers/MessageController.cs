@@ -23,10 +23,10 @@ namespace MvcSocialWeb.Controllers
         /// <summary>
         /// Отображение страницы переписки с пользователем
         /// </summary>
-        [Route("Chat")]
-        [HttpPost]
+        [Route("Chat/{id}")]
+        [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Chat(string id)
+        public async Task<IActionResult> Chat([FromRoute]string id)
         {
             var items = await _userServices.GetItemForManipulation<Message, MessageRepository>(User, id);
 
@@ -49,14 +49,12 @@ namespace MvcSocialWeb.Controllers
             {
                 Sender = items.user!,
                 Recipient = items.friend!,
-                Text = chat.NewMessage.Text ?? string.Empty
+                Text = chat.NewMessage.Text
             };
 
             await items.repo?.CreateAsync(newMessage)!;
 
-            var model = await GetCharModelView(items.user!, items.friend!, items.repo!);
-            
-            return View("Chat", model);
+            return Redirect($"/Chat/{id}");
         }
 
         /// <summary>
@@ -70,7 +68,7 @@ namespace MvcSocialWeb.Controllers
             {
                 User = user,
                 Friend = friend,
-                History = history
+                History = history.OrderBy(x => x.Id).ToList(),
             };
 
             return model;

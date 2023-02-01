@@ -8,6 +8,10 @@
     var userId = UserManager.GetUserId(User);
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.js"></script>
+
 <div class="container background-white chat-container flex-justif-center">
     <div class="chat-wrapper">
         <form method="get" asp-controller="AccountManager" asp-action="MyPage">
@@ -36,10 +40,21 @@
             }
         </div>
 
+        <script>
+            let chatBlock = document.querySelector('.chat-block');
+            chatBlock.scrollTop = chatBlock.scrollHeight;
+        </script>
+
+       
         <form method="post" asp-controller="Message" asp-action="NewMessage" asp-route-id="@Model.Friend.Id">
             <textarea asp-for="NewMessage.Text" class="form-control textarea" rows="4" placeholder="Введите новое сообщение"></textarea>
             
             <button type="submit" class="btn_submit">Отправить</button>
         </form>
     </div>
+    
+    <script>
+        let textarea = document.querySelector('.textarea');
+        textarea.value = "";
+    </script>
 </div>
