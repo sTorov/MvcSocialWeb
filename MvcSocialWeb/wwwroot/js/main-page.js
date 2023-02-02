@@ -86,3 +86,31 @@ function AddChangeStyleEvent() {
     ddlMonth.addEventListener("change", ddlMonthFirstSelect);
     ddlYear.addEventListener("change", ddlYearFirstSelect);
 }
+
+function OnChatLoad() {
+    let chatBlock = document.querySelector('.chat-block');
+    let textarea = document.querySelector('.textarea');
+    let btn = document.querySelector('.btn_submit');
+
+    chatBlock.scrollTop = chatBlock.scrollHeight;
+
+    window.onscroll = () => {
+        localStorage['scrollPos'] = window.scrollY;
+    };
+    window.onload = () => {
+        if (localStorage['scrollPos'] != null)
+            window.scrollTo({ left: 0, top: localStorage['scrollPos'], behavior: "instant" });
+        if (sessionStorage['message'] != null) {
+            textarea.value = sessionStorage['message'];
+
+            if (sessionStorage['message'] != '')
+                textarea.focus();
+        }
+    };
+    textarea.oninput = () => {
+        sessionStorage['message'] = textarea.value;
+    };
+    btn.onclick = () => {
+        sessionStorage['message'] = '';
+    };
+}

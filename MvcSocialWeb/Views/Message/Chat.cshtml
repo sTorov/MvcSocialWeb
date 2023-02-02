@@ -14,13 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.js"></script>
 
 <script>
-    window.onscroll = () => {
-        localStorage.setItem('scrollPos', window.scrollY);
-    };
-    window.onload = () => {
-        if (localStorage.getItem('scrollPos') != 0)
-            window.scrollTo({left:0, top:localStorage.getItem('scrollPos'), behavior: "instant"});
-    };
+
 </script>
 
 <div class="container background-white chat-container flex-justif-center">
@@ -50,12 +44,6 @@
                 <p class="text">Напишите первое сообщение!</p>
             }
         </div>
-
-        <script>
-            let chatBlock = document.querySelector('.chat-block');
-            chatBlock.scrollTop = chatBlock.scrollHeight;
-        </script>
-
        
         <form method="post" asp-controller="Message" asp-action="NewMessage" asp-route-id="@Model.Friend.Id">
             <textarea asp-for="NewMessage.Text" class="form-control textarea" rows="4" placeholder="Введите новое сообщение"></textarea>
@@ -63,4 +51,8 @@
             <button type="submit" class="btn_submit">Отправить</button>
         </form>
     </div>
+
+    <script src="~/js/main-page.js"></script>
+    <script>OnChatLoad()</script>
+
 </div>
