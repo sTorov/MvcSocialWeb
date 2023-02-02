@@ -13,7 +13,7 @@ namespace MvcSocialWeb.Data
     {
         public SocialWebContext(DbContextOptions<SocialWebContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

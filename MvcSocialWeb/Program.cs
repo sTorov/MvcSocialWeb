@@ -19,7 +19,7 @@ namespace MvcSocialWeb
             var builder = WebApplication.CreateBuilder(args);
 
             var connection = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<SocialWebContext>(option => option.UseSqlServer(connection))
+            builder.Services.AddDbContext<SocialWebContext>(option => option.UseSqlServer(connection, b => b.MigrationsAssembly("MvcSocialWeb")))
                 .AddUnitOfWork()
                 .AddCustomRepository<Friend, FriendRepository>()
                 .AddCustomRepository<Message, MessageRepository>()
