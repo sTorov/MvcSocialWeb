@@ -92,7 +92,6 @@ function OnChatLoad() {
     let textarea = document.querySelector('.textarea');
     let btn = document.querySelector('.btn_submit');
 
-    chatBlock.scrollTop = chatBlock.scrollHeight;
 
     window.onscroll = () => {
         localStorage['scrollPos'] = window.scrollY;
@@ -106,11 +105,27 @@ function OnChatLoad() {
             if (sessionStorage['message'] != '')
                 textarea.focus();
         }
+
+        if (sessionStorage['chatScroll'] != '')
+            chatBlock.scrollTop = sessionStorage['chatScroll'];
+        else
+            chatBlock.scrollTop = chatBlock.scrollHeight;
     };
     textarea.oninput = () => {
         sessionStorage['message'] = textarea.value;
     };
     btn.onclick = () => {
         sessionStorage['message'] = '';
+        sessionStorage['chatScroll'] = '';
+    };
+    chatBlock.onscroll = () => {
+        let checkValue = window.screen.width < 992 ?
+            325 : 345;
+
+        let dev = chatBlock.scrollHeight - chatBlock.scrollTop;
+
+        sessionStorage['chatScroll'] = dev < checkValue
+            ? ''
+            : chatBlock.scrollTop;
     };
 }
