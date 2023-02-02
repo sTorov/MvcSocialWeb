@@ -8,10 +8,10 @@
         public RegisterViewModel RegisterView { get; set; }
         public LoginViewModel LoginView { get; set; }
 
-        public AccountView()
+        public AccountView(string returnUrl)
         {
             RegisterView = new RegisterViewModel();
-            LoginView = new LoginViewModel();
+            LoginView = new LoginViewModel() { ReturnUrl = returnUrl };
         }
 
         public AccountView(LoginViewModel loginView)

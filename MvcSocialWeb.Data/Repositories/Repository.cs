@@ -31,7 +31,7 @@ namespace MvcSocialWeb.Data.Repositories
 
         public async Task<T?> GetAsync(int id) => await Set.FindAsync(id);
 
-        public IEnumerable<T> GetAll() => Set;
+        public async Task<List<T>> GetAllAsync() => await Set.ToListAsync();
 
         public async Task UpdateAsync(T item)
         {

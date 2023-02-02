@@ -38,7 +38,7 @@ namespace MvcSocialWeb.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View("Home/Login");
+            return View("Login");
         }
 
         /// <summary>
@@ -74,10 +74,10 @@ namespace MvcSocialWeb.Controllers
         [Route("Logout")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout(string returnUrl)
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { returnUrl });
         }
 
         /// <summary>
@@ -101,8 +101,9 @@ namespace MvcSocialWeb.Controllers
         [HttpGet]
         [Route("Edit")]
         [Authorize]
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit()
         {
+            ViewData["User"] = await _userManager.GetUserAsync(User);
             return View();
         }
 
@@ -145,7 +146,7 @@ namespace MvcSocialWeb.Controllers
             var currentUser = await _userManager.GetUserAsync(user);
             var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
 
-            return await repo?.GetFriendsByUser(currentUser);
+            return await repo?.GetFriendsByUserAsync(currentUser);
         }
     }
 }

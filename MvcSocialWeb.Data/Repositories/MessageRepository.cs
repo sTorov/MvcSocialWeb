@@ -11,7 +11,7 @@ namespace MvcSocialWeb.Data.Repositories
         /// <summary>
         /// Получение переписки 2-х пользователей
         /// </summary>
-        public async Task<List<Message>> GetMessages(User sender, User recipient)
+        public async Task<List<Message>> GetMessagesAsync(User sender, User recipient)
         {
             Set.Include(x => x.Recipient).Include(x => x.Sender);
 

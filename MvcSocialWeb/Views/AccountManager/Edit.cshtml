@@ -1,11 +1,8 @@
 ﻿@model MvcSocialWeb.ViewModels.Users.UserEditViewModel
-@using Microsoft.AspNetCore.Identity;
-@using MvcSocialWeb.Data.DBModel.Users
-@inject UserManager<User> UserManager
 
 @{
     ViewData["Title"] = "Обновление учетных данных";
-    var user = await UserManager.GetUserAsync(User);
+    var user = ViewData["User"] as MvcSocialWeb.Data.DBModel.Users.User;
     var birthDate = string.Join("-", user.BirthDate.ToString("d").Split(".").Reverse());
 }
 

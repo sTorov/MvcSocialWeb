@@ -8,7 +8,7 @@ namespace MvcSocialWeb.Data.Repositories
     {
         public FriendRepository(SocialWebContext db) : base(db){ }
 
-        public async Task AddFriend(User target, User friend)
+        public async Task AddFriendAsync(User target, User friend)
         {
             var friends = await Set.FirstOrDefaultAsync(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
 
@@ -26,7 +26,7 @@ namespace MvcSocialWeb.Data.Repositories
             }
         }
 
-        public async Task<List<User>> GetFriendsByUser(User target)
+        public async Task<List<User>> GetFriendsByUserAsync(User target)
         {
             var friends = Set
             .Include(x => x.CurrentFriend)
@@ -38,7 +38,7 @@ namespace MvcSocialWeb.Data.Repositories
             return await Task.Run(() => friends.ToList());
         }
 
-        public async Task DeleteFriend(User target, User friend)
+        public async Task DeleteFriendAsync(User target, User friend)
         {
             var friends = await Set.FirstOrDefaultAsync(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
 

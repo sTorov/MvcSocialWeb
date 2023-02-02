@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MvcSocialWeb.Controllers;
-using MvcSocialWeb.Data.DBModel.Friend;
 using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Data.Repositories;
 using MvcSocialWeb.Data.Repositories.Interfaces;

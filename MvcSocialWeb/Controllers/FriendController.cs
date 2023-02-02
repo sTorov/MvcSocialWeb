@@ -40,8 +40,8 @@ namespace MvcSocialWeb.Controllers
         {
             var items = await _userServices.GetItemForManipulation<Friend, FriendRepository>(User, id);
 
-            await items.repo!.AddFriend(items.user!, items.friend!);
-            await items.repo!.AddFriend(items.friend!, items.user!);
+            await items.repo!.AddFriendAsync(items.user!, items.friend!);
+            await items.repo!.AddFriendAsync(items.friend!, items.user!);
 
             return RedirectToAction("MyPage", "AccountManager");
         }
@@ -56,8 +56,8 @@ namespace MvcSocialWeb.Controllers
         {
             var items = await _userServices.GetItemForManipulation<Friend, FriendRepository>(User, id);
 
-            await items.repo!.DeleteFriend(items.user!, items.friend!);
-            await items.repo!.DeleteFriend(items.friend!, items.user!);
+            await items.repo!.DeleteFriendAsync(items.user!, items.friend!);
+            await items.repo!.DeleteFriendAsync(items.friend!, items.user!);
 
             return RedirectToAction("MyPage", "AccountManager");
         }
@@ -80,16 +80,13 @@ namespace MvcSocialWeb.Controllers
         /// </summary>
         private async Task<SearchViewModel> CreateSearch(string search)
         {
-            var model = new SearchViewModel();
-            if (string.IsNullOrEmpty(search) || string.IsNullOrWhiteSpace(search))
-                return model;
-
             var currentUser = User;
             var result = await _userManager.GetUserAsync(currentUser);
-            
-            var list = _userManager.Users.AsEnumerable()
-                .Where(user => user.GetFullName().ToLower().Contains(search.ToLower()))
-                .ToList();
+
+            var list = _userManager.Users.AsEnumerable().ToList();
+            if (!string.IsNullOrEmpty(search) || !string.IsNullOrWhiteSpace(search))
+                list = list.Where(user => user.GetFullName().ToLower().Contains(search.ToLower())).ToList();
+
             var withFriend = await GetAllFriend();
             
             var data = new List<UserWithFriendExt>();
@@ -103,7 +100,11 @@ namespace MvcSocialWeb.Controllers
                     data.Add(t);
             }
 
-            model.FindUsers = data;
+            var model = new SearchViewModel()
+            {
+                FindUsers = data
+            };
+
             return model;
         }
 
@@ -116,7 +117,7 @@ namespace MvcSocialWeb.Controllers
             var result = await _userManager.GetUserAsync(user);
             var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
             
-            return await repo?.GetFriendsByUser(result);
+            return await repo?.GetFriendsByUserAsync(result);
         }
     }
 }

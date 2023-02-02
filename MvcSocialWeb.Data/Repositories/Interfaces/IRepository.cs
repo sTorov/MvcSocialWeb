@@ -8,7 +8,7 @@
         /// <summary>
         /// Получение всех обектов <typeparamref name="T"/>
         /// </summary>
-        IEnumerable<T> GetAll();
+        Task<List<T>> GetAllAsync();
         /// <summary>
         /// Получение объекта <typeparamref name="T"/>
         /// </summary>

@@ -61,7 +61,7 @@ namespace MvcSocialWeb.Controllers
         /// </summary>
         private async Task<ChatViewModel> GetCharModelView(User user, User friend, MessageRepository repo)
         {
-            var history = await repo.GetMessages(user, friend);
+            var history = await repo.GetMessagesAsync(user, friend);
 
             var model = new ChatViewModel()
             {

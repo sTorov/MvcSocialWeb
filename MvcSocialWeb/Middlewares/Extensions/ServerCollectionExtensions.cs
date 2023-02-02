@@ -27,11 +27,20 @@ namespace MvcSocialWeb.Middlewares.Extensions
         }
 
         /// <summary>
-        /// Добавление сервиса проверки введённых пользователем данных на наличие в БД
+        /// Добавление сервиса с общим функционалом для контроллеров
         /// </summary>
-        public static IServiceCollection AddUserValidation(this IServiceCollection services) 
+        public static IServiceCollection AddUserServices(this IServiceCollection services) 
         {
             services.AddScoped<UserServices>();
+            return services;
+        }
+
+        /// <summary>
+        /// Добавление сервиса генерации тестовых пользователей
+        /// </summary>
+        public static IServiceCollection AddUserGeneration(this IServiceCollection services)
+        {
+            services.AddScoped<UserGeneration>();
             return services;
         }
     }

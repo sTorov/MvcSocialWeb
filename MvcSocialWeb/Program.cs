@@ -5,9 +5,7 @@ using MvcSocialWeb.Data.DBModel.Friend;
 using MvcSocialWeb.Data.DBModel.Messages;
 using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Data.Repositories;
-using MvcSocialWeb.Data.Repositories.Interfaces;
 using MvcSocialWeb.Middlewares.Extensions;
-using MvcSocialWeb.Middlewares.Services;
 using System.Reflection;
 
 namespace MvcSocialWeb
@@ -25,7 +23,8 @@ namespace MvcSocialWeb
                 .AddUnitOfWork()
                 .AddCustomRepository<Friend, FriendRepository>()
                 .AddCustomRepository<Message, MessageRepository>()
-                .AddUserValidation();
+                .AddUserServices()
+                .AddUserGeneration();
 
             var assembly = Assembly.GetAssembly(typeof(MapperProfile));
             builder.Services.AddAutoMapper(assembly);
@@ -64,7 +63,6 @@ namespace MvcSocialWeb
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
-
         }
     }
 }
