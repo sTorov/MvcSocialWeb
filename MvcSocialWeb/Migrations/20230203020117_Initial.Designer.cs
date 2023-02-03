@@ -12,8 +12,8 @@ using MvcSocialWeb.Data;
 namespace MvcSocialWeb.Migrations
 {
     [DbContext(typeof(SocialWebContext))]
-    [Migration("20230202222848_FirstName-LastName-UserIsNull")]
-    partial class FirstNameLastNameUserIsNull
+    [Migration("20230203020117_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

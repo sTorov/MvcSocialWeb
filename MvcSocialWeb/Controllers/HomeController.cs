@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Middlewares.Services;
@@ -43,6 +44,7 @@ namespace MvcSocialWeb.Controllers
         /// </summary>
         [HttpGet]
         [Route("Generate/{value}")]
+        [Authorize("admin")]
         public async Task<IActionResult> Generate([FromRoute]string value)
         {
             var userList = _userGen.Populate(value);

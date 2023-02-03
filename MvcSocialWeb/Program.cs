@@ -38,6 +38,14 @@ namespace MvcSocialWeb
                 option.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<SocialWebContext>();
 
+            builder.Services.AddAuthorization(options =>                          
+            {
+                options.AddPolicy("admin", policy =>
+                {
+                    policy.RequireUserName("admin");
+                });
+            });
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -64,5 +72,7 @@ namespace MvcSocialWeb
 
             app.Run();
         }
+
+
     }
 }
