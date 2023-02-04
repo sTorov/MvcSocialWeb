@@ -29,9 +29,9 @@ namespace MvcSocialWeb.Middlewares.Extensions
         /// <summary>
         /// Добавление сервиса с общим функционалом для контроллеров
         /// </summary>
-        public static IServiceCollection AddUserServices(this IServiceCollection services) 
+        public static IServiceCollection AddControllerServices(this IServiceCollection services) 
         {
-            services.AddScoped<UserServices>();
+            services.AddScoped<ControllerServices>();
             return services;
         }
 

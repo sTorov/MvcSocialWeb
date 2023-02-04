@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MvcSocialWeb.Controllers;
+using MvcSocialWeb.Data.DBModel.Friend;
 using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Data.Repositories;
 using MvcSocialWeb.Data.Repositories.Interfaces;
@@ -10,12 +11,12 @@ namespace MvcSocialWeb.Middlewares.Services
     /// <summary>
     /// Общий функционал для контроллеров
     /// </summary>
-    public class UserServices
+    public class ControllerServices
     {
         private readonly UserManager<User> _userManager;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserServices(UserManager<User> userManager, IUnitOfWork unitOfWork)
+        public ControllerServices(UserManager<User> userManager, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _unitOfWork = unitOfWork;
@@ -62,6 +63,17 @@ namespace MvcSocialWeb.Middlewares.Services
             var repo = _unitOfWork.GetRepository<TEntity>() as TRepository;
 
             return (currentUser, friend, repo);
+        }
+
+        /// <summary>
+        /// Получение списка друзей пользователя
+        /// </summary>
+        public async Task<List<User>> GetFriends(ClaimsPrincipal claims)
+        {
+            var currentUser = await _userManager.GetUserAsync(claims);
+            var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
+
+            return (await repo!.GetFriendsByUserAsync(currentUser!)) ?? new List<User>();
         }
     }
 }

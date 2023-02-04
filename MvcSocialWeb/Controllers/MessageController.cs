@@ -13,11 +13,11 @@ namespace MvcSocialWeb.Controllers
     /// </summary>
     public class MessageController : Controller
     {
-        private readonly UserServices _userServices;
+        private readonly ControllerServices _сontrollerServices;
 
-        public MessageController(UserServices userServices)
+        public MessageController(ControllerServices сontrollerServices)
         {
-            _userServices = userServices;
+            _сontrollerServices = сontrollerServices;
         }
 
         /// <summary>
@@ -28,8 +28,8 @@ namespace MvcSocialWeb.Controllers
         [Authorize]
         public async Task<IActionResult> Chat([FromRoute]string id)
         {
-            var items = await _userServices.GetItemForManipulation<Message, MessageRepository>(User, id);
-            var model = await GetCharModelView(items.user!, items.friend!, items.repo!);
+            var (user, friend, repo) = await _сontrollerServices.GetItemForManipulation<Message, MessageRepository>(User, id);
+            var model = await GetCharModelView(user!, friend!, repo!);
 
             return View(model);
         }
@@ -40,18 +40,18 @@ namespace MvcSocialWeb.Controllers
         [Route("NewMessage")]
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> NewMessage(string id, ChatViewModel chat)
+        public async Task<IActionResult> NewMessage(string id, ChatViewModel model)
         {
-            var items = await _userServices.GetItemForManipulation<Message, MessageRepository>(User, id);
+            var (user, friend, repo) = await _сontrollerServices.GetItemForManipulation<Message, MessageRepository>(User, id);
 
             var newMessage = new Message()
             {
-                Sender = items.user!,
-                Recipient = items.friend!,
-                Text = chat.NewMessage.Text
+                Sender = user!,
+                Recipient = friend!,
+                Text = model.NewMessage.Text
             };
 
-            await items.repo?.CreateAsync(newMessage)!;
+            await repo!.CreateAsync(newMessage);
 
             return Redirect($"/Chat/{id}");
         }

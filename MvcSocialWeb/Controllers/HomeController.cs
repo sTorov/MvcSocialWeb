@@ -9,14 +9,17 @@ using System.Diagnostics;
 
 namespace MvcSocialWeb.Controllers
 {
+    /// <summary>
+    /// Контроллер главной страницы
+    /// </summary>
     public class HomeController : Controller
     {
         private readonly UserGeneration _userGen;
         private readonly UserManager<User> _userManager;
 
-        public HomeController(UserGeneration generation, UserManager<User> userManager)
+        public HomeController(UserGeneration userGen, UserManager<User> userManager)
         {
-            _userGen = generation;
+            _userGen = userGen;
             _userManager = userManager;
         }
 
@@ -25,7 +28,7 @@ namespace MvcSocialWeb.Controllers
         /// </summary>
         public IActionResult Index(string returnUrl)
         {
-            if(User!.Identity!.IsAuthenticated)
+            if(User.Identity!.IsAuthenticated)
                 return RedirectToAction("MyPage", "AccountManager");
             else
                 return View(new AccountView(returnUrl));
@@ -62,6 +65,9 @@ namespace MvcSocialWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Вывод страницы с ошибкой
+        /// </summary>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

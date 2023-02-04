@@ -23,7 +23,7 @@ namespace MvcSocialWeb
                 .AddUnitOfWork()
                 .AddCustomRepository<Friend, FriendRepository>()
                 .AddCustomRepository<Message, MessageRepository>()
-                .AddUserServices()
+                .AddControllerServices()
                 .AddUserGeneration();
 
             var assembly = Assembly.GetAssembly(typeof(MapperProfile));

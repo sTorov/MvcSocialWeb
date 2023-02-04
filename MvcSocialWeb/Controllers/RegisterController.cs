@@ -17,24 +17,24 @@ namespace MvcSocialWeb.Controllers
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly UserServices _userServices;
+        private readonly ControllerServices _controllerServices;
 
-        public RegisterController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, UserServices userValidation)
+        public RegisterController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, ControllerServices controllerServices)
         {
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
-            _userServices = userValidation;
+            _controllerServices = controllerServices;
         }
 
         /// <summary>
-        /// Первый этап регистрации
+        /// Страница регистрации    *(не реализовано)
         /// </summary>
         [Route("Register")]
         [HttpGet]
         public IActionResult Register()
         {
-            return View("Home/Register");
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace MvcSocialWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            await _userServices.CheckDataAtRegistration(this, model.Login, model.EmailReg);
+            await _controllerServices.CheckDataAtRegistration(this, model.Login, model.EmailReg);
 
             if (ModelState.IsValid) 
             {

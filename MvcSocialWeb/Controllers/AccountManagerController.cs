@@ -10,6 +10,8 @@ using MvcSocialWeb.Data.Repositories.Interfaces;
 using MvcSocialWeb.Data.DBModel.Friend;
 using MvcSocialWeb.Data.Repositories;
 using MvcSocialWeb.Middlewares.Services;
+using MvcSocialWeb.ViewModels;
+using System.Diagnostics;
 
 namespace MvcSocialWeb.Controllers
 {
@@ -20,25 +22,23 @@ namespace MvcSocialWeb.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly UserServices _userValidation;
+        private readonly ControllerServices _controllerServices;
 
-        public AccountManagerController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IUnitOfWork unitOfWork, UserServices userValidation)
+        public AccountManagerController(UserManager<User> userManager, SignInManager<User> signInManager, ControllerServices controllerServices)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _unitOfWork = unitOfWork;
-            _userValidation = userValidation;
+            _controllerServices = controllerServices;
         }
 
         /// <summary>
-        /// Показ формы авторизации пользователя
+        /// Страница авторизации    (не реализовано*)
         /// </summary>
         [Route("Login")]
         [HttpGet]
         public IActionResult Login()
         {
-            return View("Login");
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
@@ -90,7 +90,9 @@ namespace MvcSocialWeb.Controllers
         {
             var user = User;
             var result = await _userManager.GetUserAsync(user);
-            var model = new UserViewModel(result!, await GetFriends());
+            var friends = await _controllerServices.GetFriends(user);
+
+            var model = new UserViewModel(result!, friends);
 
             return View("User", model);
         }
@@ -118,7 +120,7 @@ namespace MvcSocialWeb.Controllers
             var user = User;
             var currentUser = await _userManager.GetUserAsync(user);
 
-            await _userValidation.CheckDataAtUpdate(this, model.UserName, model.Email, currentUser!);
+            await _controllerServices.CheckDataAtUpdate(this, model.UserName, model.Email, currentUser!);
 
             if (ModelState.IsValid)
             {
@@ -138,15 +140,12 @@ namespace MvcSocialWeb.Controllers
         }
 
         /// <summary>
-        /// Получение списка друзей пользователя
+        /// Вывод страницы с ошибкой
         /// </summary>
-        private async Task<List<User>?> GetFriends()
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
         {
-            var user = User;
-            var currentUser = await _userManager.GetUserAsync(user);
-            var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
-
-            return await repo.GetFriendsByUserAsync(currentUser);
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

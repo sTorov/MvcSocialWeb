@@ -8,7 +8,6 @@ using MvcSocialWeb.Data.Repositories;
 using MvcSocialWeb.Data.Repositories.Interfaces;
 using MvcSocialWeb.Middlewares.Services;
 using MvcSocialWeb.ViewModels.Friend;
-using System.Security.Claims;
 
 namespace MvcSocialWeb.Controllers
 {
@@ -20,14 +19,14 @@ namespace MvcSocialWeb.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserServices _userServices;
+        private readonly ControllerServices _controllerServices;
 
-        public FriendController(UserManager<User> userManager, IMapper mapper, IUnitOfWork unitOfWork, UserServices userServices)
+        public FriendController(UserManager<User> userManager, IMapper mapper, IUnitOfWork unitOfWork, ControllerServices controllerServices)
         {
             _userManager = userManager;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-            _userServices = userServices;
+            _controllerServices = controllerServices;
         }
 
         /// <summary>
@@ -38,10 +37,10 @@ namespace MvcSocialWeb.Controllers
         [Authorize]
         public async Task<IActionResult> AddFriend(string id)
         {
-            var items = await _userServices.GetItemForManipulation<Friend, FriendRepository>(User, id);
+            var (user, friend, repo) = await _controllerServices.GetItemForManipulation<Friend, FriendRepository>(User, id);
 
-            await items.repo!.AddFriendAsync(items.user!, items.friend!);
-            await items.repo!.AddFriendAsync(items.friend!, items.user!);
+            await repo!.AddFriendAsync(user!, friend!);
+            await repo!.AddFriendAsync(friend!, user!);
 
             return RedirectToAction("MyPage", "AccountManager");
         }
@@ -54,10 +53,10 @@ namespace MvcSocialWeb.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteFriend(string id)
         {
-            var items = await _userServices.GetItemForManipulation<Friend, FriendRepository>(User, id);
+            var (user, friend, repo) = await _controllerServices.GetItemForManipulation<Friend, FriendRepository>(User, id);
 
-            await items.repo!.DeleteFriendAsync(items.user!, items.friend!);
-            await items.repo!.DeleteFriendAsync(items.friend!, items.user!);
+            await repo!.DeleteFriendAsync(user!, friend!);
+            await repo!.DeleteFriendAsync(friend!, user!);
 
             return RedirectToAction("MyPage", "AccountManager");
         }
@@ -87,7 +86,7 @@ namespace MvcSocialWeb.Controllers
             if (!string.IsNullOrEmpty(search) || !string.IsNullOrWhiteSpace(search))
                 list = list.Where(user => user.GetFullName().ToLower().Contains(search.ToLower())).ToList();
 
-            var withFriend = await GetAllFriend();
+            var withFriend = await _controllerServices.GetFriends(currentUser);
             
             var data = new List<UserWithFriendExt>();
             foreach (var searchedUser in list)
@@ -96,28 +95,13 @@ namespace MvcSocialWeb.Controllers
                 t.IsFriendWithCurrent = withFriend
                     .Where(friend => friend.Id == searchedUser.Id).Count() != 0;
 
-                if(t.Id != result.Id)
+                if(t.Id != result!.Id)
                     data.Add(t);
             }
 
-            var model = new SearchViewModel()
-            {
-                FindUsers = data
-            };
+            var model = new SearchViewModel() { FindUsers = data };
 
             return model;
-        }
-
-        /// <summary>
-        /// Получение списка друзей пользователя
-        /// </summary>
-        private async Task<List<User>> GetAllFriend()
-        {
-            var user = User;
-            var result = await _userManager.GetUserAsync(user);
-            var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
-            
-            return await repo?.GetFriendsByUserAsync(result);
         }
     }
 }
