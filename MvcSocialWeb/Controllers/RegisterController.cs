@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Middlewares.Services;
-using MvcSocialWeb.ViewModels;
 using MvcSocialWeb.ViewModels.Account;
-using System.Diagnostics;
 
 namespace MvcSocialWeb.Controllers
 {
@@ -73,15 +71,6 @@ namespace MvcSocialWeb.Controllers
                 }
             }
             return View("RegisterPart2", model);
-        }
-
-        /// <summary>
-        /// Вывод страницы с ошибкой
-        /// </summary>
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
