@@ -1,0 +1,50 @@
+﻿@model MvcSocialWeb.ViewModels.Messages.ChatViewModel
+
+@{
+    ViewData["Title"] = "Чат";
+}
+
+<meta http-equiv="refresh" content="10">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.js"></script>
+
+<div class="container background-white chat-container flex-justif-center">
+    <div class="chat-wrapper">
+        <form method="get" asp-controller="AccountManager" asp-action="MyPage">
+            <button type="submit" class="enter_submit">Назад</button>
+        </form>
+
+        <h4 class="center">Чат с @Model.Friend.UserName</h4>
+        <div class="chat-block flex-col">
+            @if (Model.History.Count != 0)
+            {
+                @foreach (var mess in Model.History)
+                {
+                    if (mess.SenderId == Model.User.Id)
+                    {
+                        <p class="message">@mess.Text</p>
+                    }
+                    else
+                    {
+                        <p class="message right-pos-messsage">@mess.Text</p>
+                    }
+                }
+            }
+            else
+            {
+                <p class="text">Напишите первое сообщение!</p>
+            }
+        </div>
+       
+        <form method="post" asp-controller="Message" asp-action="NewMessage" asp-route-id="@Model.Friend.Id">
+            <textarea asp-for="NewMessage.Text" class="form-control textarea" rows="4" placeholder="Введите новое сообщение"></textarea>
+            
+            <button type="submit" class="btn_submit">Отправить</button>
+        </form>
+    </div>
+
+    <script src="~/js/main-page.js"></script>
+    <script>OnChatLoad()</script>
+
+</div>

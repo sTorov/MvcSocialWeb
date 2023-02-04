@@ -1,0 +1,36 @@
+﻿@model MvcSocialWeb.ViewModels.Friend.SearchViewModel
+
+@{
+    ViewData["Title"] = "Поиск пользователей";
+}
+
+<div class="block-reg wrapper-friend background-white">
+    @if (Model.FindUsers.Count == 0)
+    {
+        <label>Поиск не дал результатов!</label>
+    }
+    else{
+        @foreach (var user in Model.FindUsers)
+        {
+            <div class="user-block flex-col">
+                <div class="flex-alitem-center flex-space-between">
+                    <img class="user-block__img" src="@user.Image" />
+                    <div class="flex-col user-block__label-block">
+                        <label>@user.GetFullName()</label>
+                        <label class="text-color-gray">@user.UserName</label>
+                    </div>
+                </div>
+                @if (!user.IsFriendWithCurrent){
+                    <form method="post" asp-controller="Friend" asp-action="AddFriend" asp-route-id="@user.Id" class="user-block__form">
+                        <button class="primary_btn" type="submit">Добавить в друзья</button>
+                    </form>
+                } else
+                {
+                    <form class="user-block__form">
+                        <button class="primary_btn" disabled type="submit">Вы уже друзья!</button>
+                    </form>
+                }
+            </div>
+        }
+    }
+</div>

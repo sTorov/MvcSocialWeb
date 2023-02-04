@@ -1,0 +1,102 @@
+﻿@model MvcSocialWeb.ViewModels.Account.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.js"></script>
+
+<div class="block-reg-step2 background-white">
+
+    <h3 class="center margin-bottom_40">Регистрация нового пользователя</h3>
+    <form class="frm" method="post" asp-controller="Register" asp-action="Register">
+        <div asp-validation-summary="ModelOnly" class="text-size_12 text-danger"></div>
+
+        <div class="margin_7 flex-col">
+            <div class="label-block">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control width-initial" placeholder="Введите имя" />
+            </div>
+            <span asp-validation-for="FirstName" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="label-block">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control width-initial" placeholder="Введите фамилию" />
+            </div>
+            <span asp-validation-for="LastName" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="label-block">
+                <label asp-for="Login"></label>
+                <input asp-for="Login" class="form-control width-initial" placeholder="Введите никнейм" />
+            </div>
+            <span asp-validation-for="Login" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="text-color-gray text-size_12">Дата рождения</div>
+
+        <div class="mrgn mrgn-date center">
+            <div class="date_control-wrapper">
+                <select asp-for="Date" class="form-control date_control default-color " id="ddlDay">
+                    <option>@Model.Date</option>
+                </select>
+            </div>
+
+            <div class="date_control-wrapper">
+                <select asp-for="Month" class="form-control date_control default-color " id="ddlMonth"
+                        asp-items="Html.GetEnumSelectList<MvcSocialWeb.ViewModels.Months>()">
+                    <option>@Model.Month</option>
+                </select>
+            </div>
+
+            <div class="date_control-wrapper">
+                <select asp-for="Year" class="form-control date_control default-color" id="ddlYear"
+                        asp-items="Enumerable.Range(DateTime.Now.AddYears(-100).Year,
+                    DateTime.Now.AddYears(-14).Year - DateTime.Now.AddYears(-100).Year)
+                    .Reverse().Select(x => new SelectListItem(x.ToString(), x.ToString()))">
+                    <option>@Model.Year</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="label-block">
+                <label asp-for="EmailReg"></label>
+                <input asp-for="EmailReg" class="form-control width-initial" placeholder="Введите email" />
+            </div>
+            <span asp-validation-for="EmailReg" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="label-block">
+                <label asp-for="PasswordReg"></label>
+                <input asp-for="PasswordReg" class="form-control width-initial" placeholder="Введите пароль" />
+            </div>
+            <span asp-validation-for="PasswordReg" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="label-block">
+                <label asp-for="PasswordConfirm"></label>
+                <input asp-for="PasswordConfirm" class="form-control width-initial" placeholder="Подтведите пароль" />
+            </div>
+            <span asp-validation-for="PasswordConfirm" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <button class="btn_submit width-initial" type="submit">Регистрация</button>
+    </form>
+
+    <script src="~/js/main-page.js"></script>
+
+    <script>
+        RemoveEventListener(ddlDay);
+        RemoveEventListener(ddlMonth);
+        RemoveEventListener(ddlYear);
+        PopulateDays();
+        RemoveOption(0);
+    </script>
+</div>

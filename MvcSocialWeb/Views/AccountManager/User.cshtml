@@ -1,0 +1,55 @@
+﻿@model MvcSocialWeb.ViewModels.Users.UserViewModel
+
+@{
+    ViewData["Title"] = "Страница пользователя";
+}
+
+<div class="background-white wrapper">
+    <h2 class="center title">@Model.User.GetFullName()</h2>
+    <div class="user-container">
+        <aside class="flex-col user-side">
+            <img class="user-image" src="@Model.User.Image" />
+            <form method="get" asp-action="Edit" asp-controller="AccountManager">
+                <button class="enter_submit" type="submit">Редактировать</button>
+            </form>
+        </aside>
+        <main class="main-user">
+            <div class="info">
+                <p class="text"><span class="text-color-lightgray">Статус: </span>@Model.User.Status</p>
+                <p class="text"><span class="text-color-lightgray">Дата рождения: </span>@Model.User.BirthDate.ToString("D")</p>
+                <p class="text"><span class="text-color-lightgray">О себе: </span>@Model.User.About</p>
+                <p class="text"><span class="text-color-lightgray">Email: </span>@Model.User.Email</p>
+            </div>
+            <div class="info">
+                <p class="text-color-lightgray text">Список друзей</p>
+                <div class="flex-justif-center">
+                    <div class="info-container">
+                        @if (Model.Friends.Count != 0)
+                        {
+                            @foreach (var friend in Model.Friends)
+                            {
+                                <div class="user-block flex-col">
+                                    <img class="user-block__img width-100" src="@friend.Image" width="50" />
+                                    <label>@friend.UserName</label>
+                                    <form method="get" asp-controller="Message" asp-action="Chat" asp-route-id="@friend.Id">
+                                        <button type="submit" class="primary_btn">Чат</button>
+                                    </form>
+                                    <form method="post" asp-controller="Friend" asp-action="DeleteFriend" asp-route-id="@friend.Id">
+                                        <button type="submit" class="primary_btn">Удалить из друзей</button>
+                                    </form>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            window.onunload = () => {
+                sessionStorage['chatScroll'] = '';
+            }
+        </script>
+
+    </div>
+</div>

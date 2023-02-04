@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using MvcSocialWeb.Data.DBModel.Users;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form method="post" asp-controller="AccountManager" asp-action="Logout" asp-route-returnUrl="@Context.Request.Path">
+        <button class="enter_submit margin_0" type="submit">Выход</button>
+    </form>
+}

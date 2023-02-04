@@ -1,4 +1,4 @@
-namespace MvcSocialWeb.Models
+namespace MvcSocialWeb.ViewModels
 {
     public class ErrorViewModel
     {

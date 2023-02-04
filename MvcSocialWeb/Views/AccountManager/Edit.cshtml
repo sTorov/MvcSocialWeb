@@ -1,0 +1,99 @@
+﻿@model MvcSocialWeb.ViewModels.Users.UserEditViewModel
+
+@{
+    ViewData["Title"] = "Обновление учетных данных";
+    var user = ViewData["User"] as MvcSocialWeb.Data.DBModel.Users.User;
+    var birthDate = string.Join("-", user.BirthDate.ToString("d").Split(".").Reverse());
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.js"></script>
+
+<script>
+    window.addEventListener('load', () => {
+        document.querySelector('.textarea').value = @(Html.Raw(user.GetNormalizedAbout()));
+    });
+</script>
+
+<div class="background-white wrapper">
+    <h2 class="center title">Редактирование пользователя</h2>
+
+    <form class="frm max-width-500" method="post" asp-controller="AccountManager" asp-action="Update">
+    <div asp-validation-summary="ModelOnly" class="text-size_12 text-danger"></div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="FirstName" class="flex-20"></label>
+                <input asp-for="FirstName" class="form-control flex-50" placeholder="Введите имя" value="@user.FirstName"/>
+            </div>
+            <span asp-validation-for="FirstName" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="LastName" class="flex-20"></label>
+                <input asp-for="LastName" class="form-control flex-50" placeholder="Введите фамилию" value="@user.LastName"/>
+            </div>
+            <span asp-validation-for="LastName" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="MiddleName" class="flex-20"></label>
+                <input asp-for="MiddleName" class="form-control flex-50" placeholder="Введите отчество" value="@user.MiddleName" />
+            </div>
+            <span asp-validation-for="MiddleName" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="UserName" class="flex-20"></label>
+                <input asp-for="UserName" class="form-control flex-50" placeholder="Введите никнейм" value="@user.UserName" />
+            </div>
+            <span asp-validation-for="UserName" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="BirthDate" class="width-35p"></label>
+                <input asp-for="BirthDate" class="form-control width-initial" type="date" value="@birthDate" />
+            </div>
+            <span asp-validation-for="BirthDate" class="text-danger text-size_12 margin-side-25p"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="Email" class="flex-20"></label>
+                <input asp-for="Email" class="form-control flex-50" placeholder="Введите email" value="@user.Email" />
+            </div>
+            <span asp-validation-for="Email" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="Image" class="flex-20"></label>
+                <input asp-for="Image" class="form-control flex-50" placeholder="Введите адрес изображения" value="@user.Image" />
+            </div>
+            <span asp-validation-for="Image" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-center">
+                <label asp-for="Status" class="flex-20"></label>
+                <input asp-for="Status" class="form-control flex-50" placeholder="Введите статус" value="@user.Status"/>
+            </div>
+            <span asp-validation-for="Status" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <div class="margin_7 flex-col">
+            <div class="flex-alitem-start">
+                <label asp-for="About" class="flex-20"></label>
+                <textarea rows="5" asp-for="About" class="textarea form-control flex-50" placeholder="Введите описание"></textarea>
+            </div>
+            <span asp-validation-for="About" class="text-danger text-size_12 right-pos-messsage"></span>
+        </div>
+
+        <button class="btn_submit" type="submit">Сохранить</button>
+    </form>
+</div>
