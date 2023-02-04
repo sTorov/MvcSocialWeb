@@ -4,10 +4,16 @@ using MvcSocialWeb.Data.DBModel.Users;
 
 namespace MvcSocialWeb.Data.Repositories
 {
+    /// <summary>
+    /// Репозиторий друзей
+    /// </summary>
     public class FriendRepository : Repository<Friend>
     {
         public FriendRepository(SocialWebContext db) : base(db){ }
 
+        /// <summary>
+        /// Добавление друга
+        /// </summary>
         public async Task AddFriendAsync(User target, User friend)
         {
             var friends = await Set.FirstOrDefaultAsync(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);
@@ -26,6 +32,9 @@ namespace MvcSocialWeb.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Получение списка друзей для указанного пользователя
+        /// </summary>
         public async Task<List<User>> GetFriendsByUserAsync(User target)
         {
             var friends = Set
@@ -38,6 +47,9 @@ namespace MvcSocialWeb.Data.Repositories
             return await Task.Run(() => friends.ToList());
         }
 
+        /// <summary>
+        /// Удаление друга
+        /// </summary>
         public async Task DeleteFriendAsync(User target, User friend)
         {
             var friends = await Set.FirstOrDefaultAsync(x => x.UserId == target.Id && x.CurrentFriendId == friend.Id);

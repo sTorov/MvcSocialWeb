@@ -6,23 +6,23 @@
     public interface IRepository<T> where T : class
     {
         /// <summary>
-        /// Получение всех обектов <typeparamref name="T"/>
+        /// Получение всех обектов
         /// </summary>
         Task<List<T>> GetAllAsync();
         /// <summary>
-        /// Получение объекта <typeparamref name="T"/>
+        /// Получение объекта
         /// </summary>
         Task<T?> GetAsync(int id);
         /// <summary>
-        /// Создание объекта <typeparamref name="T"/>
+        /// Создание объекта
         /// </summary>
         Task CreateAsync(T item);
         /// <summary>
-        /// ОБновление объекта <typeparamref name="T"/>
+        /// ОБновление объекта
         /// </summary>
         Task UpdateAsync(T item);
         /// <summary>
-        /// Удаление объекта <typeparamref name="T"/>
+        /// Удаление объекта
         /// </summary>
         Task DeleteAsync(T item);
     }

@@ -3,6 +3,9 @@ using MvcSocialWeb.Data.Repositories.Interfaces;
 
 namespace MvcSocialWeb.Data.Repositories
 {
+    /// <summary>
+    /// Базовый репозиторий
+    /// </summary>
     public class Repository<T> : IRepository<T> where T : class
     {
         protected DbContext _dbContext;

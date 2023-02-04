@@ -3,6 +3,9 @@ using MvcSocialWeb.Data.Repositories.Interfaces;
 
 namespace MvcSocialWeb.Data.Repositories
 {
+    /// <summary>
+    /// Класс для получения любого репозитория, зарегистрированного в приложении
+    /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
         private readonly SocialWebContext _context;

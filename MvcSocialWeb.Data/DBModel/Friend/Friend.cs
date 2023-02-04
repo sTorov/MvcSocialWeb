@@ -2,6 +2,9 @@
 
 namespace MvcSocialWeb.Data.DBModel.Friend
 {
+    /// <summary>
+    /// Модель друга
+    /// </summary>
     public class Friend
     {
         public int Id { get; set; }

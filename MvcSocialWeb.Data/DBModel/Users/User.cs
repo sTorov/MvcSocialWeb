@@ -22,8 +22,14 @@ namespace MvcSocialWeb.Data.DBModel.Users
             About = "Информация обо мне.";
         }
 
+        /// <summary>
+        /// Получение польного имени пользователя
+        /// </summary>
         public string GetFullName() => $"{FirstName} {MiddleName} {LastName}";
 
+        /// <summary>
+        /// Получение значения поля About в двойных кавычках
+        /// </summary>
         public string GetNormalizedAbout() => $"\"{About}\"";
     }
 }

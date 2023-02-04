@@ -4,6 +4,9 @@ using MvcSocialWeb.Data.DBModel.Users;
 
 namespace MvcSocialWeb.Data.Repositories
 {
+    /// <summary>
+    /// Репозиторий сообщений
+    /// </summary>
     public class MessageRepository : Repository<Message>
     {
         public MessageRepository(SocialWebContext context) : base(context) { }

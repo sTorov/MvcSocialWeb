@@ -2,6 +2,9 @@
 
 namespace MvcSocialWeb.Data.DBModel.Messages
 {
+    /// <summary>
+    /// Модкль сообщения
+    /// </summary>
     public class Message
     {
         public int Id { get; set; }
