@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.Data.DBModel.Friend;
 using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Data.Repositories;
-using MvcSocialWeb.Data.Repositories.Interfaces;
 using MvcSocialWeb.Middlewares.Services;
 using MvcSocialWeb.ViewModels.Friend;
 
@@ -18,14 +17,12 @@ namespace MvcSocialWeb.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly ControllerServices _controllerServices;
 
-        public FriendController(UserManager<User> userManager, IMapper mapper, IUnitOfWork unitOfWork, ControllerServices controllerServices)
+        public FriendController(UserManager<User> userManager, IMapper mapper, ControllerServices controllerServices)
         {
             _userManager = userManager;
             _mapper = mapper;
-            _unitOfWork = unitOfWork;
             _controllerServices = controllerServices;
         }
 
