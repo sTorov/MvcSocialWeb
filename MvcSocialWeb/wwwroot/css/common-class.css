@@ -1,0 +1,105 @@
+﻿.display-none {
+    display: none;
+}
+
+.center {
+    justify-content: center;
+    text-align: center;
+}
+
+.background-main {
+    background-color: #edeef0;
+}
+
+.background-white {
+    background-color: white;
+}
+
+.text-color-gray {
+    color: gray;
+}
+
+.text-color-lightgray {
+    color: darkgray;
+}
+
+.default-color {
+    color: #212529;
+}
+
+.text-size_12 {
+    font-size: 12px;
+}
+
+.margin-bottom_15 {
+    margin-bottom: 15px;
+}
+
+.margin-bottom_40 {
+    margin-bottom: 40px;
+}
+
+.margin-side-25p {
+    margin: 0 25%;
+}
+
+.right-pos-messsage {
+    align-self: end;
+}
+
+.width-initial {
+    width: initial;
+}
+
+.width-100 {
+    max-width: 100px;
+}
+
+.max-width-500 {
+    max-width: 500px;
+}
+
+.width-35p {
+    width: 35%;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-justif-center {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-alitem-center {
+    display: flex;
+    align-items: center;
+}
+
+.flex-alitem-start {
+    display: flex;
+    align-items: start;
+}
+
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-20 {
+    flex: 20%;
+}
+
+.flex-50 {
+    flex: 50%;
+}
+
+.margin_7 {
+    margin: 7px;
+}
+
+.margin_0 {
+    margin: 0;
+}
