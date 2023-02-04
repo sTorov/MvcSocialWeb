@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MvcSocialWeb.ViewModels.Users;
@@ -7,8 +6,6 @@ using MvcSocialWeb.ViewModels.Account;
 using MvcSocialWeb.Middlewares.Extensions;
 using MvcSocialWeb.Data.DBModel.Users;
 using MvcSocialWeb.Middlewares.Services;
-using MvcSocialWeb.ViewModels;
-using System.Diagnostics;
 
 namespace MvcSocialWeb.Controllers
 {
@@ -134,15 +131,6 @@ namespace MvcSocialWeb.Controllers
                 ModelState.AddModelError("", "Некорректные данные");
                 return View("Edit", model);
             }
-        }
-
-        /// <summary>
-        /// Вывод страницы с ошибкой
-        /// </summary>
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
