@@ -2,6 +2,9 @@
 
 namespace MvcSocialWeb.ViewModels.Users
 {
+    /// <summary>
+    /// Модель данных главной страницы пользователя
+    /// </summary>
     public class UserViewModel
     {
         public User User { get; set; }

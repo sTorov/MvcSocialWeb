@@ -4,10 +4,13 @@ using MvcSocialWeb.Middlewares.Services;
 
 namespace MvcSocialWeb.Middlewares.Extensions
 {
+    /// <summary>
+    /// Расширения для IServiceCollection
+    /// </summary>
     public static class ServerCollectionExtensions
     {
         /// <summary>
-        /// Добавление UnitOfWork репозиториев в сервисы
+        /// Добавление UnitOfWork в сервисы
         /// </summary>
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services) 
         {

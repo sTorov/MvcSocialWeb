@@ -5,7 +5,7 @@ using MvcSocialWeb.ViewModels.Account;
 namespace MvcSocialWeb
 {
     /// <summary>
-    /// Настройка маппинга всех сущностей приложения
+    /// Настройка маппинга
     /// </summary>
     public class MapperProfile : Profile
     {

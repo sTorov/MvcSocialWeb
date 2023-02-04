@@ -50,6 +50,7 @@ namespace MvcSocialWeb
 
             var app = builder.Build();
 
+
             //Configs
 
             if (!app.Environment.IsDevelopment())

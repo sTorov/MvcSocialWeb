@@ -2,6 +2,9 @@
 
 namespace MvcSocialWeb.ViewModels.Users
 {
+    /// <summary>
+    /// Модель данных редактирования профиля пользователя
+    /// </summary>
     public class UserEditViewModel
     {
         [Required(ErrorMessage = "Поле обязательно для заполнения")]

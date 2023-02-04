@@ -2,6 +2,9 @@
 
 namespace MvcSocialWeb.ViewModels
 {
+    /// <summary>
+    /// Перечисление с месяцами
+    /// </summary>
     public enum Months
     {
         [Display(Name = "Январь")]

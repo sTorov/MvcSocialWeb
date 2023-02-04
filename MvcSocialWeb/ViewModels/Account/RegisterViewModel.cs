@@ -2,6 +2,9 @@
 
 namespace MvcSocialWeb.ViewModels.Account
 {
+    /// <summary>
+    /// Модель данных регистрации нового пользователя
+    /// </summary>
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "Поле обязательно для заполнения!")]

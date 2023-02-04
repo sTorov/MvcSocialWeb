@@ -3,7 +3,7 @@
 namespace MvcSocialWeb.ViewModels.Account
 {
     /// <summary>
-    /// Модель авторизации пользователя
+    /// Модель данных авторизации пользователя
     /// </summary>
     public class LoginViewModel
     {

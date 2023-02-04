@@ -3,8 +3,14 @@ using MvcSocialWeb.ViewModels.Users;
 
 namespace MvcSocialWeb.Middlewares.Extensions
 {
-    public static class UserFromModel
+    /// <summary>
+    /// Расширения для модели пользователя
+    /// </summary>
+    public static class UserExtensions
     {
+        /// <summary>
+        /// Преобразование модели представления редактирования пользователя в модель пользователя
+        /// </summary>
         public static User Convert(this User user, UserEditViewModel model)
         {
             user.FirstName = model.FirstName;
